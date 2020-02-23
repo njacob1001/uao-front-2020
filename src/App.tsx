@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { PersistGate } from 'redux-persist/integration/react'
+import React, { FC } from 'react'
+import { Provider } from 'react-redux'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+import StoreConfig from 'ducks/store'
+import Login from 'views/screens/Login'
+import Schedule from 'views/screens/Schedule'
 
-function App() {
+const { store, persistor } = StoreConfig()
+
+const App: FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <Router>
+          <Switch>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/schedules">
+              <Schedule />
+            </Route>
+            <Route>
+              <Redirect to="/login" />
+            </Route>
+          </Switch>
+        </Router>
+      </PersistGate>
+    </Provider>
+  )
 }
 
-export default App;
+export default App
