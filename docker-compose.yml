@@ -1,0 +1,11 @@
+version: '3'
+services:
+  screen-flow:
+    container_name: screen-flow
+    image: screen-flow-image
+    build: .
+    ports:
+      - '8080:8080'
+    volumes:
+      - './public:/usr/src/app/public'
+    restart: unless-stopped
