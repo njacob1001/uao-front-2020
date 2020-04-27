@@ -1,0 +1,2 @@
+export const MEETING = 'MEETING/SEARCH'
+export const DELETE_ALL = 'MEETINGS/DELTE_ALL'

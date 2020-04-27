@@ -1,14 +1,24 @@
 import { userReducer } from 'ducks/user/reducer'
+import { UserReducer } from 'ducks/user/models'
+import { meetingReducer } from 'ducks/meeting/reducer'
+import { MeetingReducer } from 'ducks/meeting/models'
+
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { all, call } from 'redux-saga/effects'
 import { userSagas } from 'ducks/user/sagas'
+import { meetingSagas } from 'ducks/meeting/sagas'
 import createSagaMiddleware, { SagaIterator } from 'redux-saga'
+
+export interface Store {
+  userReducer: UserReducer
+  meetingReducer: MeetingReducer
+}
 
 function* rootSaga(): SagaIterator {
   try {
-    yield all([call(userSagas)])
+    yield all([call(userSagas), call(meetingSagas)])
   } catch (error) {
     console.error(error)
   }
@@ -16,11 +26,12 @@ function* rootSaga(): SagaIterator {
 
 const rootReducer = combineReducers({
   userReducer,
+  meetingReducer,
 })
 
 const persistConfig = {
   key: 'root',
-  whitelist: ['userReducer'],
+  whitelist: ['userReducer', 'meetingReducer'],
   storage,
 }
 

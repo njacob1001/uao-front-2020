@@ -17,7 +17,13 @@ const App: FC = () => {
             <Route path="/login">
               <Login />
             </Route>
+            <Route path="/consultor-schedule">
+              <Schedule />
+            </Route>
             <Route path="/schedules">
+              <Schedule />
+            </Route>
+            <Route path="/admin-dashboard">
               <Schedule />
             </Route>
             <Route>

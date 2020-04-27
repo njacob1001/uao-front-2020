@@ -5,10 +5,17 @@ import * as TYPES from './action-types'
 
 const initialState: UserReducer = {
   name: '',
-  loading: false,
   token: '',
-  error: null,
   email: '',
+  role: '',
+  id: 0,
+  lastName: '',
+  cc: '',
+  uaoCode: '',
+  loading: false,
+  error: null,
+  username: '',
+  photo: '',
 }
 
 export const userReducer: Reducer<UserReducer> = (state = initialState, action) => {
@@ -22,9 +29,7 @@ export const userReducer: Reducer<UserReducer> = (state = initialState, action) 
     case TYPES.LOGIN.SUCCESS: {
       return {
         ...state,
-        email: action?.payload?.email,
-        name: action?.payload?.name,
-        token: action?.payload?.token,
+        ...action?.payload,
       }
     }
     case TYPES.LOGIN.FAILURE: {
@@ -36,6 +41,7 @@ export const userReducer: Reducer<UserReducer> = (state = initialState, action) 
     case TYPES.LOGIN.FULFILL: {
       return {
         ...state,
+        error: null,
         loading: false,
       }
     }
