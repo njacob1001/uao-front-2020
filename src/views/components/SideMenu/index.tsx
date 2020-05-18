@@ -13,6 +13,7 @@ import {
 import { Block } from 'views/components/UI/content'
 import { useDispatch } from 'react-redux'
 import { LOGOUT_SAGA } from 'ducks/user/types'
+import { useLocation, Link } from 'react-router-dom'
 
 const SideBarMenu: FC = () => {
   const dispatch = useDispatch()
@@ -21,6 +22,8 @@ const SideBarMenu: FC = () => {
       type: LOGOUT_SAGA,
     })
   }
+  const { pathname } = useLocation()
+
   return (
     <>
       <Block
@@ -32,19 +35,28 @@ const SideBarMenu: FC = () => {
         <SmallLogo src="https://i.imgur.com/Mbnw2Hq.png" />
       </Block>
 
-      <Menu defaultSelectedKeys={['2']} mode="inline" theme="light">
+      <Menu
+        selectedKeys={[pathname.split('/')[1]]}
+        defaultSelectedKeys={['inicio']}
+        mode="inline"
+        theme="light">
         <Block height="2rem" />
-        <Menu.Item key="">
+        <Menu.Item key="inicio">
           <DesktopOutlined />
           <span>Inicio</span>
         </Menu.Item>
-        <Menu.Item key="3">
-          <TeamOutlined />
-          <span>Facilitadores</span>
+
+        <Menu.Item key="facilitators">
+          <Link to="/facilitators/all">
+            <TeamOutlined />
+            <span>Facilitadores</span>
+          </Link>
         </Menu.Item>
-        <Menu.Item key="emprendedores">
-          <TeamOutlined />
-          <span>Emprendedores</span>
+        <Menu.Item key="entrepreneurs">
+          <Link to="/entrepreneurs/all">
+            <TeamOutlined />
+            <span>Emprendedores</span>
+          </Link>
         </Menu.Item>
         <Menu.Item key="proyectos">
           <RocketOutlined />

@@ -20,7 +20,7 @@ export const facilitatorReducer: Reducer<FacilitatorReducer> = (state = initialS
     case TYPES.MAIN_REQUEST.SUCCESS: {
       return {
         ...state,
-        entrepreneurs: action?.payload,
+        facilitators: action?.payload,
       }
     }
     case TYPES.MAIN_REQUEST.FAILURE: {

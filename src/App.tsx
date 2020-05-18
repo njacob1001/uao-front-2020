@@ -6,6 +6,8 @@ import StoreConfig from 'ducks/store'
 import Login from 'views/screens/Login'
 import Schedule from 'views/screens/Schedule'
 import './override.less'
+import Facilitators from 'views/screens/Facilitators'
+import Entrepreneurs from 'views/screens/Entrepreneurs'
 
 const { store, persistor } = StoreConfig()
 
@@ -18,13 +20,13 @@ const App: FC = () => {
             <Route path="/login">
               <Login />
             </Route>
-            <Route path="/consultor-schedule">
-              <Schedule />
+            <Route path="/facilitators">
+              <Facilitators />
             </Route>
-            <Route path="/schedules">
-              <Schedule />
+            <Route path="/entrepreneurs">
+              <Entrepreneurs />
             </Route>
-            <Route path="/admin-dashboard">
+            <Route path="/home">
               <Schedule />
             </Route>
             <Route>

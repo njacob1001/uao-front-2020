@@ -36,8 +36,9 @@ const LoginForm: FC = () => {
     )
   }
   if (currentToken) {
-    history.push('/schedules/meetings')
+    history.push('/facilitators/all')
   }
+
   return (
     <BlockTheme height="100vh" display="flex" justifyContent="center" alignItems="center">
       <Block
