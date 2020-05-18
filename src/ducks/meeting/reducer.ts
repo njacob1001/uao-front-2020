@@ -36,8 +36,34 @@ export const meetingReducer: Reducer<MeetingReducer> = (state = initialState, ac
         loading: false,
       }
     }
+
     case DELETE_ALL: {
       return initialState
+    }
+
+    case TYPES.MAIN_REQUEST.REQUEST: {
+      return {
+        ...state,
+        loading: true,
+      }
+    }
+    case TYPES.MAIN_REQUEST.SUCCESS: {
+      return {
+        ...state,
+        meetings: action?.payload,
+      }
+    }
+    case TYPES.MAIN_REQUEST.FAILURE: {
+      return {
+        ...state,
+        error: action?.payload,
+      }
+    }
+    case TYPES.MAIN_REQUEST.FULFILL: {
+      return {
+        ...state,
+        loading: false,
+      }
     }
 
     default:

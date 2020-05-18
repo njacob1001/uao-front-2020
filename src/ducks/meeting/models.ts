@@ -1,19 +1,21 @@
 export interface User {
   id: number
-  name: string
-  lastName: string
-  photo: string
+  names: string
+  last_names: string
 }
 
 export interface Meeting {
   id: number
-  subject: string
+  asunto: string
   description: string
   start: string
   end: string
   state: 'scheduled' | 'canceled' | 'later' | 'done' | 'inprogress' | 'modified'
-  consultor: User
+  facilitador: User
   emprendedor: User
+  proyecto: {
+    name: string
+  }
 }
 
 export interface MeetingReducer {

@@ -1,7 +1,9 @@
 import React, { FC } from 'react'
-import { Table, Typography, Divider } from 'antd'
+import { Table, Typography, Divider, Button } from 'antd'
+import { PlusOutlined } from '@ant-design/icons'
 import { useSelector } from 'react-redux'
 import { facilitatorSelector } from 'ducks/facilitators/selectors'
+import { Link } from 'react-router-dom'
 import { Block } from '../UI/content'
 
 const { Title } = Typography
@@ -40,7 +42,16 @@ const FacilitatorsTable: FC<any> = () => {
 
   return (
     <Block flex={1}>
-      <Title>Facilitadores</Title>
+      <Block display="flex" alignItems="center">
+        <Title style={{ marginBottom: 0 }}>Facilitadores</Title>
+        <Block ml="3rem">
+          <Link to="/facilitators/create">
+            <Button type="primary" shape="round" icon={<PlusOutlined />} size="large">
+              Crear
+            </Button>
+          </Link>
+        </Block>
+      </Block>
       <Divider />
       <Table columns={columns} dataSource={facilitators} />
     </Block>

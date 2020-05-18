@@ -3,6 +3,7 @@ import Header from 'views/components/Header'
 import SideMenu from 'views/components/SideMenu'
 import { Layout } from 'antd'
 import FacilitatorsTable from 'views/components/Table/Facilitators'
+import CreateFacilitatorForm from 'views/components/forms/Facilitator/Create'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { MAIN_REQUEST } from 'ducks/facilitators/types'
@@ -26,6 +27,9 @@ const Facilitators: FC = () => {
           <Switch>
             <Route path="/facilitators/all">
               <FacilitatorsTable />
+            </Route>
+            <Route path="/facilitators/create">
+              <CreateFacilitatorForm />
             </Route>
           </Switch>
         </Content>

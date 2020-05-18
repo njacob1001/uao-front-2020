@@ -58,13 +58,17 @@ const SideBarMenu: FC = () => {
             <span>Emprendedores</span>
           </Link>
         </Menu.Item>
-        <Menu.Item key="proyectos">
-          <RocketOutlined />
-          <span>Proyectos</span>
+        <Menu.Item key="projects">
+          <Link to="/projects/all">
+            <RocketOutlined />
+            <span>Proyectos</span>
+          </Link>
         </Menu.Item>
-        <Menu.Item key="encuentros">
-          <CommentOutlined />
-          <span>Encuentros</span>
+        <Menu.Item key="meetings">
+          <Link to="/meetings/all">
+            <CommentOutlined />
+            <span>Encuentros</span>
+          </Link>
         </Menu.Item>
         <Menu.Item key="actividades">
           <SolutionOutlined />

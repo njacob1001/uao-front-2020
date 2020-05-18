@@ -1,41 +1,38 @@
-import React, { FC } from 'react'
-import { useParams } from 'react-router-dom'
-import { MeetingSelector } from 'ducks/meeting/selectors'
-import { useSelector } from 'react-redux'
-import { Store } from 'ducks/store'
-import { Typography, Tag } from 'antd'
-import { Block } from 'views/components/UI/content'
+import React, { FC, useEffect } from 'react'
+import Header from 'views/components/Header'
+import SideMenu from 'views/components/SideMenu'
+import { Layout } from 'antd'
+import MeetingTable from 'views/components/Table/Meetings'
+import { Switch, Route, Redirect } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { MAIN_REQUEST } from 'ducks/meeting/action-types'
 
-const { Title, Paragraph } = Typography
+const { Sider, Content, Footer } = Layout
 
-const tags = {
-  scheduled: 'cyan',
-  canceled: 'default',
-  later: 'warning',
-  done: 'success',
-  inprogress: 'processing',
-  modified: 'default',
-}
-
-const MeetingDetail: FC = () => {
-  const { meeting } = useParams()
-  const meetingData = useSelector((store: Store) =>
-    MeetingSelector(store, { meetingId: meeting || '' })
-  )
-  console.log(`id meting: ${meeting}`)
-  console.log(meetingData)
+const Meetings: FC = () => {
+  // usePrivateRoute()
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(MAIN_REQUEST.trigger())
+  }, [])
   return (
-    <Block>
-      <Title>
-        <span>{meetingData?.subject}</span>
-        <Tag style={{ marginLeft: '0.5rem' }} color={tags[meetingData?.state]}>
-          {meetingData?.state}
-        </Tag>
-      </Title>
-      <Paragraph style={{ width: '50rem' }}>{meetingData?.description}</Paragraph>
-      <h4>Tareas</h4>
-    </Block>
+    <Layout style={{ width: '100vw', height: '100vh' }}>
+      <Sider breakpoint="lg" theme="light" collapsedWidth="0">
+        <SideMenu />
+      </Sider>
+      <Layout>
+        <Header />
+        <Content style={{ margin: '24px 16px 0' }}>
+          <Switch>
+            <Route path="/meetings/all">
+              <MeetingTable />
+            </Route>
+          </Switch>
+        </Content>
+        <Footer style={{ textAlign: 'center' }}>UAO 2020 Created by Ingesoft</Footer>
+      </Layout>
+    </Layout>
   )
 }
 
-export default MeetingDetail
+export default Meetings

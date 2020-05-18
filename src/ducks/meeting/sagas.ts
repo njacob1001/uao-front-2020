@@ -1,6 +1,20 @@
 import { all, takeLatest, put, call, select } from 'redux-saga/effects'
-import { getMeetings } from 'services/meeting'
+import { getMeetings, getAll } from 'services/meeting'
 import * as TYPES from './action-types'
+
+function* getAllMeetings(): any {
+  try {
+    yield put(TYPES.MAIN_REQUEST.request())
+    const { data: result } = yield call(getAll)
+    if (result.data?.encuentros) {
+      yield put(TYPES.MAIN_REQUEST.success(result.data?.encuentros))
+    }
+  } catch (err) {
+    yield put(TYPES.MAIN_REQUEST.failure(err))
+  } finally {
+    yield put(TYPES.MAIN_REQUEST.fulfill())
+  }
+}
 
 function* meetingSaga(): any {
   try {
@@ -10,23 +24,7 @@ function* meetingSaga(): any {
     yield put(TYPES.MEETING.request())
     const { data: result } = yield call(getMeetings, userID, role)
     if (result.data?.meetings) {
-      yield put(
-        TYPES.MEETING.success(
-          result.data?.meetings.map((m: any) => ({
-            ...m,
-            consultor: {
-              name: m?.consultor?.name,
-              lastName: m?.consultor?.last_name,
-              photo: m?.consultor?.photo?.url,
-            },
-            emprendedor: {
-              name: m?.emprendedor?.name,
-              lastName: m?.emprendedor?.last_name,
-              photo: m?.emprendedor?.photo?.url,
-            },
-          }))
-        )
-      )
+      yield put(TYPES.MEETING.success(result.data?.meetings))
     }
   } catch (err) {
     yield put(TYPES.MEETING.failure(err))
@@ -36,5 +34,8 @@ function* meetingSaga(): any {
 }
 
 export function* meetingSagas(): any {
-  yield all([takeLatest(TYPES.MEETING.TRIGGER, meetingSaga)])
+  yield all([
+    takeLatest(TYPES.MEETING.TRIGGER, meetingSaga),
+    takeLatest(TYPES.MAIN_REQUEST.TRIGGER, getAllMeetings),
+  ])
 }

@@ -9,6 +9,11 @@ interface DetailProps {
 
 const selectMeetings = (store: Store): Meeting[] => store.meetingReducer?.meetings
 
+export const allMeetingSelectors: Selector<Store, Meeting[]> = createSelector(
+  selectMeetings,
+  a => a
+)
+
 const selectDetailprops = (_: Store, props: DetailProps): string => props.meetingId
 
 const selectMeeting = (meetings: Meeting[], meetId: string): Meeting =>

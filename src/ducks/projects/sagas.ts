@@ -6,8 +6,8 @@ function* getAllProjectSaga(): any {
   try {
     yield put(TYPES.MAIN_REQUEST.request())
     const { data: result } = yield call(getAll)
-    if (result.data?.users) {
-      yield put(TYPES.MAIN_REQUEST.success(result.data?.users))
+    if (result.data?.proyectos) {
+      yield put(TYPES.MAIN_REQUEST.success(result.data?.proyectos))
     }
   } catch (err) {
     yield put(TYPES.MAIN_REQUEST.failure(err))

@@ -20,7 +20,7 @@ export const projectReducer: Reducer<ProjectReducer> = (state = initialState, ac
     case TYPES.MAIN_REQUEST.SUCCESS: {
       return {
         ...state,
-        entrepreneurs: action?.payload,
+        projects: action?.payload,
       }
     }
     case TYPES.MAIN_REQUEST.FAILURE: {

@@ -1,16 +1,20 @@
-import React, { FC } from 'react'
-import usePrivateRoute from 'hooks/Private/route'
+import React, { FC, useEffect } from 'react'
 import Header from 'views/components/Header'
 import SideMenu from 'views/components/SideMenu'
 import { Layout } from 'antd'
-import Meetings from 'views/components/Meetings'
+import ProjectsTables from 'views/components/Table/Projects'
 import { Switch, Route, Redirect } from 'react-router-dom'
-import MeetingDetail from 'views/screens/Meeting'
+import { useDispatch } from 'react-redux'
+import { MAIN_REQUEST } from 'ducks/projects/types'
 
 const { Sider, Content, Footer } = Layout
 
-const Schedule: FC = () => {
-  usePrivateRoute()
+const Facilitators: FC = () => {
+  // usePrivateRoute()
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(MAIN_REQUEST.trigger())
+  }, [])
   return (
     <Layout style={{ width: '100vw', height: '100vh' }}>
       <Sider breakpoint="lg" theme="light" collapsedWidth="0">
@@ -20,14 +24,8 @@ const Schedule: FC = () => {
         <Header />
         <Content style={{ margin: '24px 16px 0' }}>
           <Switch>
-            <Route path="/schedules/meetings">
-              <Meetings />
-            </Route>
-            <Route path="/schedules/detail-meeting/:meeting">
-              <MeetingDetail />
-            </Route>
-            <Route>
-              <Redirect to="/schedules/meetings" />
+            <Route path="/projects/all">
+              <ProjectsTables />
             </Route>
           </Switch>
         </Content>
@@ -37,4 +35,4 @@ const Schedule: FC = () => {
   )
 }
 
-export default Schedule
+export default Facilitators
