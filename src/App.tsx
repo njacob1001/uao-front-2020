@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import StoreConfig from 'ducks/store'
 import Login from 'views/screens/Login'
 import Schedule from 'views/screens/Schedule'
+import './override.less'
 
 const { store, persistor } = StoreConfig()
 

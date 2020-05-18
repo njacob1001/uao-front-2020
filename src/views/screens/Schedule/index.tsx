@@ -13,7 +13,7 @@ const Schedule: FC = () => {
   usePrivateRoute()
   return (
     <Layout style={{ width: '100vw', height: '100vh' }}>
-      <Sider breakpoint="lg" collapsedWidth="0">
+      <Sider breakpoint="lg" theme="light" collapsedWidth="0">
         <SideMenu />
       </Sider>
       <Layout>

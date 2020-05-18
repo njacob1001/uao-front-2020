@@ -5,5 +5,5 @@ width: 6rem;
 `
 
 export const SmallLogo = Styled.img`
-width: 4rem;
+width: 9rem;
 `

@@ -10,6 +10,7 @@ const Header: FC = () => {
 
   return (
     <StyledPageHeader
+      style={{ height: '4.125rem' }}
       onBack={() => history.go(-1)}
       title="SINAPSIS"
       subTitle={role[0]?.toUpperCase() + role?.slice(1)}
