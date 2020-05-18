@@ -33,6 +33,7 @@ const SideBarMenu: FC = () => {
       </Block>
 
       <Menu defaultSelectedKeys={['2']} mode="inline" theme="light">
+        <Block height="2rem" />
         <Menu.Item key="">
           <DesktopOutlined />
           <span>Inicio</span>

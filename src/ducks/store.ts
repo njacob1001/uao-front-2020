@@ -2,6 +2,12 @@ import { userReducer } from 'ducks/user/reducer'
 import { UserReducer } from 'ducks/user/models'
 import { meetingReducer } from 'ducks/meeting/reducer'
 import { MeetingReducer } from 'ducks/meeting/models'
+import { EntrepreneurReducer } from 'ducks/entrepreneurs/models'
+import { entrepreneurReducer } from 'ducks/entrepreneurs/reducer'
+import { FacilitatorReducer } from 'ducks/facilitators/models'
+import { facilitatorReducer } from 'ducks/facilitators/reducer'
+import { ProjectReducer } from 'ducks/projects/models'
+import { projectReducer } from 'ducks/projects/reducer'
 
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux'
 import { persistStore, persistReducer } from 'redux-persist'
@@ -9,16 +15,28 @@ import storage from 'redux-persist/lib/storage'
 import { all, call } from 'redux-saga/effects'
 import { userSagas } from 'ducks/user/sagas'
 import { meetingSagas } from 'ducks/meeting/sagas'
+import { entrepeneursSagas } from 'ducks/entrepreneurs/sagas'
+import { facilitatorsSaga } from 'ducks/facilitators/sagas'
+import { projectsSagas } from 'ducks/projects/sagas'
 import createSagaMiddleware, { SagaIterator } from 'redux-saga'
 
 export interface Store {
   userReducer: UserReducer
   meetingReducer: MeetingReducer
+  entrepreneurReducer: EntrepreneurReducer
+  facilitatorReducer: FacilitatorReducer
+  projectReducer: ProjectReducer
 }
 
 function* rootSaga(): SagaIterator {
   try {
-    yield all([call(userSagas), call(meetingSagas)])
+    yield all([
+      call(userSagas),
+      call(meetingSagas),
+      call(entrepeneursSagas),
+      call(facilitatorsSaga),
+      call(projectsSagas),
+    ])
   } catch (error) {
     console.error(error)
   }
@@ -27,11 +45,20 @@ function* rootSaga(): SagaIterator {
 const rootReducer = combineReducers({
   userReducer,
   meetingReducer,
+  entrepreneurReducer,
+  facilitatorReducer,
+  projectReducer,
 })
 
 const persistConfig = {
   key: 'root',
-  whitelist: ['userReducer', 'meetingReducer'],
+  whitelist: [
+    'userReducer',
+    'meetingReducer',
+    'entrepreneurReducer',
+    'facilitatorReducer',
+    'projectReducer',
+  ],
   storage,
 }
 
