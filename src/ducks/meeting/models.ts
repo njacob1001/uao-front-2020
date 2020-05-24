@@ -10,7 +10,6 @@ export interface Meeting {
   description: string
   start: string
   end: string
-  state: 'scheduled' | 'canceled' | 'later' | 'done' | 'inprogress' | 'modified'
   facilitador: User
   emprendedor: User
   proyecto: {
