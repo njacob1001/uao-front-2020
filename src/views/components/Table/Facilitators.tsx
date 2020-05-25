@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 import { facilitatorSelector } from 'ducks/facilitators/selectors'
 import { Link } from 'react-router-dom'
 import { Block } from '../UI/content'
+import TableTemplate from './MainTemplate'
 
 const { Title } = Typography
 
@@ -38,23 +39,15 @@ const columns: any[] = [
 const FacilitatorsTable: FC<any> = () => {
   const facilitators = useSelector(facilitatorSelector)
 
-  console.log(facilitators)
-
   return (
-    <Block flex={1}>
-      <Block display="flex" alignItems="center">
-        <Title style={{ marginBottom: 0 }}>Facilitadores</Title>
-        <Block ml="3rem">
-          <Link to="/app/facilitators/create">
-            <Button type="primary" shape="round" icon={<PlusOutlined />} size="large">
-              Crear
-            </Button>
-          </Link>
-        </Block>
-      </Block>
-      <Divider />
-      <Table columns={columns} dataSource={facilitators} />
-    </Block>
+    <TableTemplate
+      data={facilitators}
+      columns={columns}
+      title="Facilitadores"
+      collection="users"
+      createPath="/app/facilitators/create"
+      updatePath="/app/facilitators"
+    />
   )
 }
 export default FacilitatorsTable

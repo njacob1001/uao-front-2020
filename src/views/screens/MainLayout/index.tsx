@@ -10,6 +10,7 @@ import Entrepreneurs from 'views/screens/Entrepreneurs'
 import Projects from '../Projects'
 import Facilitators from '../Facilitators'
 import CreateFacilitators from '../Facilitators/Create'
+import UpdateFacilitator from '../Facilitators/Update'
 import Meetings from '../Meeting'
 import NotFound from '../NotFound'
 
@@ -41,6 +42,9 @@ const MainLayout: FC = () => {
             </Route>
             <Route path="/app/facilitators/create">
               <CreateFacilitators />
+            </Route>
+            <Route path="/app/facilitators/update/:id">
+              <UpdateFacilitator />
             </Route>
             <Route path="/app/meetings/all">
               <Meetings />
