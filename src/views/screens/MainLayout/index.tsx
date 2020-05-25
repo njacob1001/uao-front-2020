@@ -8,6 +8,8 @@ import { MAIN_REQUEST } from 'ducks/projects/types'
 import usePrivateRoute from 'hooks/Private/route'
 import Entrepreneurs from 'views/screens/Entrepreneurs'
 import Projects from '../Projects'
+import CreateProjects from '../Projects/Create'
+import UpdateProjects from '../Projects/Update'
 import Facilitators from '../Facilitators'
 import CreateFacilitators from '../Facilitators/Create'
 import UpdateFacilitator from '../Facilitators/Update'
@@ -33,8 +35,14 @@ const MainLayout: FC = () => {
         <Header />
         <Content style={{ margin: '24px 16px 0' }}>
           <Switch>
-            <Route path="/app/projects/all">
+            <Route path="/app/proyectos/all">
               <Projects />
+            </Route>
+            <Route path="/app/proyectos/create">
+              <CreateProjects />
+            </Route>
+            <Route path="/app/proyectos/update/:id">
+              <UpdateProjects />
             </Route>
             <Route path="/app/emprendedores/all">
               <Entrepreneurs />

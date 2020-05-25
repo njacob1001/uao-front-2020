@@ -1,9 +1,10 @@
 export interface Project {
+  id: string
   name: string
   description: string
   sector: string
   status: string
-  entrepreneur: {
+  emprendedor: {
     id: number
     names: string
     last_names: string

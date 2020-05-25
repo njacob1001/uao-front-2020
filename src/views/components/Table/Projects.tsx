@@ -1,12 +1,7 @@
 import React, { FC } from 'react'
-import { Table, Typography, Divider, Button } from 'antd'
 import { useSelector } from 'react-redux'
 import { ProjectSelector } from 'ducks/projects/selectors'
-import { Link } from 'react-router-dom'
-import { PlusOutlined } from '@ant-design/icons'
-import { Block } from '../UI/content'
-
-const { Title } = Typography
+import TableTemplate from './MainTemplate'
 
 const columns: any[] = [
   {
@@ -37,26 +32,17 @@ const FacilitatorsTable: FC<any> = () => {
   console.log(projects)
 
   return (
-    <Block flex={1}>
-      <Block display="flex" alignItems="center">
-        <Title style={{ marginBottom: 0 }}>Proyectos</Title>
-        <Block ml="3rem">
-          <Link to="/projects/create">
-            <Button type="primary" shape="round" icon={<PlusOutlined />} size="large">
-              Crear
-            </Button>
-          </Link>
-        </Block>
-      </Block>
-      <Divider />
-      <Table
-        columns={columns}
-        dataSource={projects?.map(item => ({
-          ...item,
-          entrepreneurName: `${item?.entrepreneur?.names} ${item?.entrepreneur?.last_names}`,
-        }))}
-      />
-    </Block>
+    <TableTemplate
+      data={projects?.map(item => ({
+        ...item,
+        entrepreneurName: `${item?.emprendedor?.names} ${item?.emprendedor?.last_names}`,
+      }))}
+      columns={columns}
+      title="Proyectos"
+      collection="proyectos"
+      createPath="/app/proyectos/create"
+      updatePath="/app/proyectos"
+    />
   )
 }
 export default FacilitatorsTable
