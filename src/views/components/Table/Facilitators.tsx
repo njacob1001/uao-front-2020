@@ -1,13 +1,7 @@
 import React, { FC } from 'react'
-import { Table, Typography, Divider, Button } from 'antd'
-import { PlusOutlined } from '@ant-design/icons'
 import { useSelector } from 'react-redux'
 import { facilitatorSelector } from 'ducks/facilitators/selectors'
-import { Link } from 'react-router-dom'
-import { Block } from '../UI/content'
 import TableTemplate from './MainTemplate'
-
-const { Title } = Typography
 
 const columns: any[] = [
   {

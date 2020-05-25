@@ -1,7 +1,3 @@
-export interface Carrera {
-  name: string
-}
-
 export interface Entrepreneur {
   id: number
   names: string
@@ -13,7 +9,8 @@ export interface Entrepreneur {
   address: string
   birthday: string
   profession: string
-  carrera: Carrera
+  career: string
+  studentCode: string
 }
 
 export interface EntrepreneurReducer {

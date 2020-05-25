@@ -53,7 +53,7 @@ const SideBarMenu: FC = () => {
           </Link>
         </Menu.Item>
         <Menu.Item key="entrepreneurs">
-          <Link to="/app/entrepreneurs/all">
+          <Link to="/app/emprendedores/all">
             <TeamOutlined />
             <span>Emprendedores</span>
           </Link>

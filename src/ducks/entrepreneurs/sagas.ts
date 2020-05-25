@@ -1,4 +1,4 @@
-import { all, takeLatest, put, call, select } from 'redux-saga/effects'
+import { all, takeLatest, put, call } from 'redux-saga/effects'
 import { getAll } from 'services/entrepreneur/get'
 import * as TYPES from './types'
 
@@ -12,7 +12,6 @@ function* getAllEntrepreneurSaga(): any {
           result.data?.users.map((m: any) => ({
             ...m,
             photo: m?.photo?.url,
-            carrera: m?.carrera?.name,
           }))
         )
       )

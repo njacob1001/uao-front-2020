@@ -15,9 +15,8 @@ export const getAll = (): AxiosPromise<any> => {
           address
           birthday
           profession
-          carrera {
-            name
-          }
+          career
+          studentCode
         }
       }
     `,

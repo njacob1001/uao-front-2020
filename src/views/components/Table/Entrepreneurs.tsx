@@ -1,12 +1,7 @@
 import React, { FC } from 'react'
-import { Table, Typography, Divider, Button } from 'antd'
 import { useSelector } from 'react-redux'
 import { entrepreneursSelector } from 'ducks/entrepreneurs/selectors'
-import { Link } from 'react-router-dom'
-import { PlusOutlined } from '@ant-design/icons'
-import { Block } from '../UI/content'
-
-const { Title } = Typography
+import TableTemplate from './MainTemplate'
 
 const columns: any[] = [
   {
@@ -31,28 +26,22 @@ const columns: any[] = [
   },
   {
     title: 'Carrera',
-    dataIndex: 'carrera',
-    key: 'carrera',
+    dataIndex: 'career',
+    key: 'career',
   },
 ]
 const FacilitatorsTable: FC<any> = () => {
   const entrepreneurs = useSelector(entrepreneursSelector)
 
   return (
-    <Block flex={1}>
-      <Block display="flex" alignItems="center">
-        <Title style={{ marginBottom: 0 }}>Emprendedores</Title>
-        <Block ml="3rem">
-          <Link to="/entrepreneurs/create">
-            <Button type="primary" shape="round" icon={<PlusOutlined />} size="large">
-              Crear
-            </Button>
-          </Link>
-        </Block>
-      </Block>
-      <Divider />
-      <Table columns={columns} dataSource={entrepreneurs} />
-    </Block>
+    <TableTemplate
+      data={entrepreneurs}
+      columns={columns}
+      title="Emprendedores"
+      collection="users"
+      createPath="/app/emprendedores/create"
+      updatePath="/app/emprendedores"
+    />
   )
 }
 export default FacilitatorsTable
