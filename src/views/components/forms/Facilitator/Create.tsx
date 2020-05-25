@@ -1,25 +1,83 @@
-import React, { FC } from 'react'
+import React, { FC, useState, useRef } from 'react'
 import { Block } from 'views/components/UI/content'
-import { Form, Input, Typography, Divider, Select, DatePicker, Button } from 'antd'
+import { Form, Input, Typography, Divider, Select, DatePicker, Button, Result } from 'antd'
 import { createFacilitator, updateFacilitator } from 'services/facilitator'
+import { useHistory } from 'react-router-dom'
 
 const FacilitatorForm: FC = () => {
+  const [status, setStatus] = useState('')
+  const currentUser = useRef<any>({})
+  const history = useHistory()
   const handleSubmit = (values: any): void => {
     console.log('finished', values)
+    currentUser.current = values
     createFacilitator({
       provider: 'local',
       username: values.email.split('@')[0],
       email: values.email,
       password: values.identification,
-    }).then(({ data: userData }: any) => {
-      if (userData.user) {
-        const userId = userData.user.id
-        updateFacilitator({
-          id: userId,
-          ...values,
-        })
-      }
     })
+      .then(({ data: userData }: any) => {
+        if (userData.user) {
+          const userId = userData.user.id
+          currentUser.current.id = userId
+          updateFacilitator({
+            id: userId,
+            ...values,
+          })
+            .then(() => {
+              setStatus('finished')
+            })
+            .catch(() => {
+              setStatus('error')
+            })
+        }
+      })
+      .catch(() => {
+        setStatus('error')
+      })
+  }
+
+  const createMore = (): void => {
+    setStatus('')
+  }
+
+  const goToList = (): void => {
+    history.go(-1)
+  }
+
+  if (status === 'error') {
+    const button = (
+      <Button onClick={goToList} type="primary" key="console">
+        Volver atrás
+      </Button>
+    )
+    return (
+      <Result
+        status="warning"
+        title="Hubo en error durante la creación del facilitador"
+        subTitle="Es posible que ya exista un usuario con los el mismo email"
+        extra={button}
+      />
+    )
+  }
+
+  if (status === 'finished') {
+    return (
+      <Result
+        status="success"
+        title="Usuario creado exitosamente"
+        subTitle={`El usuario: ${currentUser.current.names} ${currentUser.current.last_names} fue creado con el ID: ${currentUser.current.id}`}
+        extra={[
+          <Button onClick={goToList} type="primary" key="console">
+            Hecho
+          </Button>,
+          <Button onClick={createMore} key="buy">
+            Seguir Creando
+          </Button>,
+        ]}
+      />
+    )
   }
 
   return (

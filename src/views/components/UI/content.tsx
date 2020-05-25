@@ -37,7 +37,7 @@ export const Block = styled.div<BlockProps & InteractiveProps>`
   ${borders}
 `
 export const BlockTheme = styled(Block)`
-  background: radial-gradient(50% 50% at 50% 50%, #ffffff 0%, #e2e2e2 100%);
+  background: radial-gradient(50% 50% at 50% 50%, #ffffff 0%, #f5f0f7 100%);
 `
 
 export const GridForCards = styled.div`

@@ -69,22 +69,20 @@ const LoginForm: FC = () => {
   }, [])
 
   return (
-    <BlockTheme height="100vh" display="flex" justifyContent="center" alignItems="center">
-      <Block
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        width="90vw"
-        maxWidth="27rem">
-        <Logo src="https://i.imgur.com/RFJPfyp.png" />
-        <Block py="0.3rem">
-          <Typography.Text>SINAPSIS</Typography.Text>
-        </Block>
+    <BlockTheme
+      height="100vh"
+      width="100%"
+      display="flex"
+      justifyContent="center"
+      alignItems="center">
+      <Block display="flex" flexDirection="column" alignItems="center" width="100%">
+        <Logo src="https://i.imgur.com/Mbnw2Hq.png" />
+
         <Block py="1.4rem">
           <Typography.Text strong>INGRESAR</Typography.Text>
         </Block>
         <Block>
-          <Form onFinish={handleLogin} layout="vertical">
+          <Form style={{ width: '100%' }} onFinish={handleLogin} layout="vertical">
             <Form.Item
               name="email"
               rules={[
@@ -114,9 +112,9 @@ const LoginForm: FC = () => {
               <Input.Password ref={pass} prefix={<LockOutlined />} placeholder="Contraseña" />
             </Form.Item>
             <Form.Item>
-              <PrimaryButton type="primary" htmlType="submit">
+              <Button style={{ width: '100%' }} type="primary" htmlType="submit">
                 {loadingStatus ? 'Loading ' : 'Ingresar'}
-              </PrimaryButton>
+              </Button>
             </Form.Item>
           </Form>
           <Block display="flex" justifyContent="space-between" alignItems="center">
