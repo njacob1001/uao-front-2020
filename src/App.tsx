@@ -5,10 +5,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import StoreConfig from 'ducks/store'
 import Login from 'views/screens/Login'
 import './override.less'
-import Facilitators from 'views/screens/Facilitators'
-import Entrepreneurs from 'views/screens/Entrepreneurs'
-import Projects from 'views/screens/Projects'
-import Meetings from 'views/screens/Meeting'
+import MainLayout from 'views/screens/MainLayout'
 
 const { store, persistor } = StoreConfig()
 
@@ -21,24 +18,8 @@ const App: FC = () => {
             <Route path="/login">
               <Login />
             </Route>
-            <Route path="/facilitators">
-              <Facilitators />
-            </Route>
-            <Route path="/entrepreneurs">
-              <Entrepreneurs />
-            </Route>
-            <Route path="/projects">
-              <Projects />
-            </Route>
-            <Route path="/meetings">
-              <Meetings />
-            </Route>
-
-            <Route path="/home">
-              <Meetings />
-            </Route>
-            <Route>
-              <Redirect to="/login" />
+            <Route path="/app">
+              <MainLayout />
             </Route>
           </Switch>
         </Router>

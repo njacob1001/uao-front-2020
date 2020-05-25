@@ -45,7 +45,7 @@ const FacilitatorsTable: FC<any> = () => {
       <Block display="flex" alignItems="center">
         <Title style={{ marginBottom: 0 }}>Facilitadores</Title>
         <Block ml="3rem">
-          <Link to="/facilitators/create">
+          <Link to="/app/facilitators/create">
             <Button type="primary" shape="round" icon={<PlusOutlined />} size="large">
               Crear
             </Button>

@@ -47,29 +47,51 @@ const SideBarMenu: FC = () => {
         </Menu.Item>
 
         <Menu.Item key="facilitators">
-          <Link to="/facilitators/all">
+          <Link to="/app/facilitators/all">
             <TeamOutlined />
             <span>Facilitadores</span>
           </Link>
         </Menu.Item>
         <Menu.Item key="entrepreneurs">
-          <Link to="/entrepreneurs/all">
+          <Link to="/app/entrepreneurs/all">
             <TeamOutlined />
             <span>Emprendedores</span>
           </Link>
         </Menu.Item>
         <Menu.Item key="projects">
-          <Link to="/projects/all">
+          <Link to="/app/projects/all">
             <RocketOutlined />
             <span>Proyectos</span>
           </Link>
         </Menu.Item>
-        <Menu.Item key="meetings">
-          <Link to="/meetings/all">
-            <CommentOutlined />
-            <span>Encuentros</span>
-          </Link>
-        </Menu.Item>
+        <Menu.SubMenu
+          key="encuentrosgroup"
+          title={
+            <span>
+              <CommentOutlined />
+              <span>Encuentros</span>
+            </span>
+          }>
+          <Menu.Item key="meetingsall">
+            <Link to="/app/meetings/all">
+              <CommentOutlined />
+              <span>Hoy</span>
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="meetingspending">
+            <Link to="/app/meetings/all">
+              <CommentOutlined />
+              <span>Pendientes</span>
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="meetingssheduled">
+            <Link to="/app/meetings/all">
+              <CommentOutlined />
+              <span>Agendados</span>
+            </Link>
+          </Menu.Item>
+        </Menu.SubMenu>
+
         <Menu.Item key="actividades">
           <SolutionOutlined />
           <span>Actividades</span>

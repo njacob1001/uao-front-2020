@@ -1,38 +1,14 @@
 import React, { FC, useEffect } from 'react'
-import Header from 'views/components/Header'
-import SideMenu from 'views/components/SideMenu'
-import { Layout } from 'antd'
 import MeetingTable from 'views/components/Table/Meetings'
-import { Switch, Route, Redirect } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { MAIN_REQUEST } from 'ducks/meeting/action-types'
 
-const { Sider, Content, Footer } = Layout
-
 const Meetings: FC = () => {
-  // usePrivateRoute()
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(MAIN_REQUEST.trigger())
   }, [])
-  return (
-    <Layout style={{ width: '100vw', height: '100vh' }}>
-      <Sider breakpoint="lg" theme="light" collapsedWidth="0">
-        <SideMenu />
-      </Sider>
-      <Layout>
-        <Header />
-        <Content style={{ margin: '24px 16px 0' }}>
-          <Switch>
-            <Route path="/meetings/all">
-              <MeetingTable />
-            </Route>
-          </Switch>
-        </Content>
-        <Footer style={{ textAlign: 'center' }}>UAO 2020 Created by Ingesoft</Footer>
-      </Layout>
-    </Layout>
-  )
+  return <MeetingTable />
 }
 
 export default Meetings

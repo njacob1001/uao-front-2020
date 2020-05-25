@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { LOGIN } from 'ducks/user/action-types'
 import { PrimaryButton } from 'views/components/UI/Buttons'
 import { UserOutlined, LockOutlined, GoogleOutlined } from '@ant-design/icons'
+import get from 'lodash/get'
 
 const LoginForm: FC = () => {
   const dispatch = useDispatch()
@@ -35,9 +36,37 @@ const LoginForm: FC = () => {
       })
     )
   }
+
   if (currentToken) {
-    history.push('/facilitators/all')
+    history.push('/app')
   }
+
+  const handleGoogleLogin = (e: any) => {
+    e.preventDefault()
+    window.open(
+      `${process.env.REACT_APP_CMS_URL}/connect/google`,
+      'popUpWindow',
+      'height=500,width=500,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no,directories=no, status=yes'
+    )
+  }
+
+  const receiveDataFromPopup = (data: any) => {
+    if (get(data, 'data.type', '') === 'REGISTRATION') {
+      const parts = get(data, 'data.rawUrl', '').match(/([^\?]+)(\?.*)?/)
+      const query = parts[2] || ''
+      const paths = (parts[1] || '').replace(/^https?:\/\//, '').split('/')
+      const provider = paths[2]
+      console.log(query, provider)
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('message', receiveDataFromPopup, false)
+
+    return (): void => {
+      window.removeEventListener('message', receiveDataFromPopup, false)
+    }
+  }, [])
 
   return (
     <BlockTheme height="100vh" display="flex" justifyContent="center" alignItems="center">
@@ -103,10 +132,10 @@ const LoginForm: FC = () => {
           </Block>
           <Block my="1rem">
             <Button
+              onClick={handleGoogleLogin}
               icon={<GoogleOutlined />}
               style={{ width: '100%' }}
-              type="default"
-              htmlType="submit">
+              type="default">
               Ingresar con Google
             </Button>
           </Block>
