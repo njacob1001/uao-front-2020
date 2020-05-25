@@ -1,8 +1,9 @@
 import React, { FC, useState } from 'react'
-import { Table, Typography, Button, Popconfirm, message } from 'antd'
-import { PlusOutlined } from '@ant-design/icons'
+import { Table, Typography, Button, Popconfirm, message, Space, Input } from 'antd'
+import { PlusOutlined, SearchOutlined } from '@ant-design/icons'
 import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
+import Highlighter from 'react-highlight-words'
 import { Block } from '../UI/content'
 
 const { Title } = Typography
@@ -16,8 +17,11 @@ const FacilitatorsTable: FC<any> = ({
   updatePath,
 }) => {
   const [selected, setSelected] = useState([])
+  const [search, setSearch] = useState({
+    searchText: '',
+    searchedColumn: '',
+  })
   const onSelectChange = (selectedRowKeys: any): void => {
-    console.log('selectedRowKeys changed: ', selectedRowKeys)
     setSelected(selectedRowKeys)
   }
   const history = useHistory()
@@ -44,6 +48,75 @@ const FacilitatorsTable: FC<any> = ({
     hideDefaultSelections: true,
     selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
   }
+
+  const handleSearch = (selectedKeys: any, confirm: any, dataIndex: any): void => {
+    confirm()
+    setSearch({
+      searchText: selectedKeys[0],
+      searchedColumn: dataIndex,
+    })
+  }
+
+  const handleReset = (clearFilters: any): void => {
+    clearFilters()
+    setSearch({ ...search, searchText: '' })
+  }
+
+  const getColumnSearchProps = (dataIndex: any): any => ({
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }: any): any => (
+      <div style={{ padding: 8 }}>
+        <Input
+          placeholder="search"
+          value={selectedKeys[0]}
+          onChange={(e: any): any => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onPressEnter={(): any => handleSearch(selectedKeys, confirm, dataIndex)}
+          style={{ width: 188, marginBottom: 8, display: 'block' }}
+        />
+        <Space>
+          <Button
+            type="primary"
+            onClick={(): any => handleSearch(selectedKeys, confirm, dataIndex)}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90 }}>
+            Buscar
+          </Button>
+          <Button onClick={(): any => handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+            Limpiar
+          </Button>
+        </Space>
+      </div>
+    ),
+    filterIcon: (filtered: any): any => (
+      <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />
+    ),
+    onFilter: (value: any, record: any): any =>
+      record[dataIndex]
+        .toString()
+        .toLowerCase()
+        .includes(value.toLowerCase()),
+    // onFilterDropdownVisibleChange: visible => {
+    //   if (visible) {
+    //     setTimeout(() => this.searchInput.select())
+    //   }
+    // },
+    render: (text: any): any =>
+      search.searchedColumn === dataIndex ? (
+        <Highlighter
+          highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+          searchWords={[search.searchText]}
+          autoEscape
+          textToHighlight={text.toString()}
+        />
+      ) : (
+        text
+      ),
+  })
+
+  const parsedcolumns = columns.map((cl: any) => ({
+    ...cl,
+    ...getColumnSearchProps(cl.key),
+  }))
 
   return (
     <Block flex={1}>
@@ -78,7 +151,7 @@ const FacilitatorsTable: FC<any> = ({
         })}
         rowKey="id"
         rowSelection={rowSelection}
-        columns={columns}
+        columns={parsedcolumns}
         dataSource={data}
       />
     </Block>
