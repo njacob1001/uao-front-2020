@@ -1,11 +1,27 @@
 import React, { FC } from 'react'
 import { Block } from 'views/components/UI/content'
 import { Form, Input, Typography, Divider, Select, DatePicker, Button } from 'antd'
+import { createFacilitator, updateFacilitator } from 'services/facilitator'
 
 const FacilitatorForm: FC = () => {
-  const handleSubmit = () => {
-    console.log('finished')
+  const handleSubmit = (values: any): void => {
+    console.log('finished', values)
+    createFacilitator({
+      provider: 'local',
+      username: values.email.split('@')[0],
+      email: values.email,
+      password: values.identification,
+    }).then(({ data: userData }: any) => {
+      if (userData.user) {
+        const userId = userData.user.id
+        updateFacilitator({
+          id: userId,
+          ...values,
+        })
+      }
+    })
   }
+
   return (
     <Block flex={1} width="50%" height="100%" margin="0 auto">
       <Typography.Title>Nuevo facilitador</Typography.Title>

@@ -11,6 +11,7 @@ import Projects from '../Projects'
 import Facilitators from '../Facilitators'
 import CreateFacilitators from '../Facilitators/Create'
 import Meetings from '../Meeting'
+import NotFound from '../NotFound'
 
 const { Sider, Content, Footer } = Layout
 
@@ -43,6 +44,9 @@ const MainLayout: FC = () => {
             </Route>
             <Route path="/app/meetings/all">
               <Meetings />
+            </Route>
+            <Route>
+              <NotFound />
             </Route>
           </Switch>
         </Content>
