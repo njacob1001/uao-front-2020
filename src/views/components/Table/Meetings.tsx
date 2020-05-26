@@ -1,13 +1,8 @@
 import React, { FC } from 'react'
-import { Table, Typography, Divider, Button } from 'antd'
 import { useSelector } from 'react-redux'
 import { allMeetingSelectors } from 'ducks/meeting/selectors'
 import moment from 'moment'
-import { Link } from 'react-router-dom'
-import { PlusOutlined } from '@ant-design/icons'
-import { Block } from '../UI/content'
-
-const { Title } = Typography
+import TableTemplate from './MainTemplate'
 
 const columns: any[] = [
   {
@@ -19,25 +14,11 @@ const columns: any[] = [
     title: 'Inicio ',
     dataIndex: 'start',
     key: 'start',
-    render: (text: string): any => (
-      <Typography.Text>
-        <Typography.Text>{moment(new Date(text)).format('MM-DD-YYYY')}</Typography.Text>
-        {'   '}
-        <Typography.Text strong>{moment(new Date(text)).format('hh:mm a')}</Typography.Text>
-      </Typography.Text>
-    ),
   },
   {
     title: 'Fin',
     dataIndex: 'end',
     key: 'end',
-    render: (text: string): any => (
-      <Typography.Text>
-        <Typography.Text>{moment(new Date(text)).format('MM-DD-YYYY')}</Typography.Text>
-        {'   '}
-        <Typography.Text strong>{moment(new Date(text)).format('hh:mm a')}</Typography.Text>
-      </Typography.Text>
-    ),
   },
 
   {
@@ -65,31 +46,23 @@ const columns: any[] = [
 ]
 const FacilitatorsTable: FC<any> = () => {
   const meetings = useSelector(allMeetingSelectors)
-  console.log(meetings)
 
   return (
-    <Block flex={1}>
-      <Block display="flex" alignItems="center">
-        <Title style={{ marginBottom: 0 }}>Encuentros</Title>
-        <Block ml="3rem">
-          <Link to="/meetings/create">
-            <Button type="primary" shape="round" icon={<PlusOutlined />} size="large">
-              Crear
-            </Button>
-          </Link>
-        </Block>
-      </Block>
-      <Divider />
-      <Table
-        columns={columns}
-        dataSource={meetings?.map(item => ({
-          ...item,
-          emprendedorName: `${item.emprendedor?.names} ${item.emprendedor?.last_names}`,
-          facilitadorName: `${item.facilitador?.names} ${item.facilitador?.last_names}`,
-          projectName: `${item.proyecto?.name}`,
-        }))}
-      />
-    </Block>
+    <TableTemplate
+      data={meetings.map(me => ({
+        ...me,
+        end: moment(new Date(me.end)).format('MM/DD/YY hh:mm a'),
+        start: moment(new Date(me.start)).format('MM/DD/YY hh:mm a'),
+        emprendedorName: `${me.emprendedor?.names} ${me.emprendedor?.last_names}`,
+        facilitadorName: `${me.facilitador?.names} ${me.facilitador?.last_names}`,
+        projectName: me.proyecto?.name,
+      }))}
+      columns={columns}
+      title="Ecuentros"
+      collection="encuentros"
+      createPath="/app/encuentros/create"
+      updatePath="/app/encuentros"
+    />
   )
 }
 export default FacilitatorsTable

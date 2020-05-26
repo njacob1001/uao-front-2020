@@ -35,10 +35,10 @@ const FacilitatorsTable: FC<any> = ({
     })
     Promise.all(deletePromises)
       .then(() => {
-        message.success('Usuarios eliminados correctamente')
+        message.success('Elementos eliminados correctamente')
       })
       .catch(() => {
-        message.error('No se pudieron borrar los usuarios, es posible que tengan agendas asignadas')
+        message.error('No se pudieron borrar los elementos')
       })
   }
 
@@ -95,11 +95,7 @@ const FacilitatorsTable: FC<any> = ({
         .toString()
         .toLowerCase()
         .includes(value.toLowerCase()),
-    // onFilterDropdownVisibleChange: visible => {
-    //   if (visible) {
-    //     setTimeout(() => this.searchInput.select())
-    //   }
-    // },
+
     render: (text: any): any =>
       search.searchedColumn === dataIndex ? (
         <Highlighter
@@ -133,12 +129,13 @@ const FacilitatorsTable: FC<any> = ({
       <Block height="3rem" display="flex" alignItems="center">
         {selected.length ? (
           <Popconfirm
-            title="Eliminar usuarios seleccionados"
+            title="Esta acción es permanente"
             okText="Eliminar"
+            okButtonProps={{ danger: true }}
             cancelText="Cancelar"
             onConfirm={handleDelete}>
             <Button type="primary" danger>
-              Eliminar usuarios seleccionados
+              Eliminar items seleccionados
             </Button>
           </Popconfirm>
         ) : null}

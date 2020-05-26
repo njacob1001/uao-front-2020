@@ -29,8 +29,6 @@ const columns: any[] = [
 const FacilitatorsTable: FC<any> = () => {
   const projects = useSelector(ProjectSelector)
 
-  console.log(projects)
-
   return (
     <TableTemplate
       data={projects?.map(item => ({

@@ -62,7 +62,13 @@ const MainLayout: FC = () => {
             <Route path="/app/facilitators/update/:id">
               <UpdateFacilitator />
             </Route>
-            <Route path="/app/meetings/all">
+            <Route path="/app/encuentros/all">
+              <Meetings />
+            </Route>
+            <Route path="/app/encuentros/create">
+              <Meetings />
+            </Route>
+            <Route path="/app/encuentros/update/:id">
               <Meetings />
             </Route>
             <Route>

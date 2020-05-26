@@ -73,19 +73,19 @@ const SideBarMenu: FC = () => {
             </span>
           }>
           <Menu.Item key="meetingsall">
-            <Link to="/app/meetings/all">
+            <Link to="/app/encuentros/all">
               <CommentOutlined />
               <span>Hoy</span>
             </Link>
           </Menu.Item>
           <Menu.Item key="meetingspending">
-            <Link to="/app/meetings/all">
+            <Link to="/app/encuentros/all">
               <CommentOutlined />
               <span>Pendientes</span>
             </Link>
           </Menu.Item>
           <Menu.Item key="meetingssheduled">
-            <Link to="/app/meetings/all">
+            <Link to="/app/encuentros/all">
               <CommentOutlined />
               <span>Agendados</span>
             </Link>
