@@ -5,7 +5,7 @@ import { Typography, Form, Input, Button, message } from 'antd'
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { LOGIN } from 'ducks/user/action-types'
-import { UserOutlined, LockOutlined, GoogleOutlined } from '@ant-design/icons'
+import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import get from 'lodash/get'
 
 const LoginForm: FC = () => {
@@ -13,13 +13,17 @@ const LoginForm: FC = () => {
   const history = useHistory()
   const user = useRef<any>()
   const pass = useRef<any>()
-  const { loading: loadingStatus, error: errorStatus, token: currentToken } = useSelector(
-    ({ userReducer: { loading, error, token } }: any) => ({
-      loading,
-      error,
-      token,
-    })
-  )
+  const {
+    loading: loadingStatus,
+    error: errorStatus,
+    token: currentToken,
+    role: userRole,
+  } = useSelector(({ userReducer: { loading, error, token, role } }: any) => ({
+    loading,
+    error,
+    token,
+    role,
+  }))
 
   useEffect(() => {
     if (errorStatus) {
@@ -36,7 +40,14 @@ const LoginForm: FC = () => {
   }
 
   if (currentToken) {
-    history.push('/app')
+    console.log(userRole)
+    if (userRole === 'administrador') {
+      history.push('/app/administradores/all')
+    } else if (userRole === 'emprendedor') {
+      history.push('/app/encuentros/hoy')
+    } else if (userRole === 'facilitador') {
+      history.push('/app/encuentros/hoy')
+    }
   }
 
   const handleGoogleLogin = (e: any): void => {
@@ -115,26 +126,6 @@ const LoginForm: FC = () => {
               </Button>
             </Form.Item>
           </Form>
-          <Block display="flex" justifyContent="space-between" alignItems="center">
-            <Block borderBottom="solid 1px #000" flex={0.4}>
-              <span />
-            </Block>
-            <Block p=".4rem" borderRadius="50%" border="solid 1px #000">
-              <span />
-            </Block>
-            <Block borderBottom="solid 1px #000" flex={0.4}>
-              <span />
-            </Block>
-          </Block>
-          <Block my="1rem">
-            <Button
-              onClick={handleGoogleLogin}
-              icon={<GoogleOutlined />}
-              style={{ width: '100%' }}
-              type="default">
-              Ingresar con Google
-            </Button>
-          </Block>
         </Block>
       </Block>
     </BlockTheme>

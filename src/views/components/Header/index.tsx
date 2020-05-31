@@ -6,14 +6,23 @@ import { roleSelector } from 'ducks/user/selectors'
 
 const Header: FC = () => {
   const history = useHistory()
-  const role = useSelector(roleSelector)
+  const { name: userNames, lastName: userLast, role: userRole } = useSelector(
+    ({ userReducer: { loading, error, token, role, name, lastName } }: any) => ({
+      loading,
+      error,
+      token,
+      role,
+      name,
+      lastName,
+    })
+  )
 
   return (
     <StyledPageHeader
       style={{ height: '4.125rem' }}
       onBack={() => history.go(-1)}
       title="SINAPSIS"
-      // subTitle={role[0]?.toUpperCase() + role?.slice(1)}
+      subTitle={`${userNames} ${userLast}  (${userRole[0]?.toUpperCase() + userRole?.slice(1)})`}
     />
   )
 }

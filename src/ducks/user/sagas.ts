@@ -15,12 +15,12 @@ function* login(action: any): any {
     if (result.jwt) {
       yield put(
         TYPES.LOGIN.success({
-          name: result.user.name,
+          name: result.user.names,
           token: result.jwt,
           email: result.user.email,
           role: result.user?.role?.name,
           id: result.user.id,
-          lastName: result.user.last_name,
+          lastName: result.user.last_names,
           cc: result.user.identification,
           uaoCode: result.user.uao_code,
           username: result.user.username,
