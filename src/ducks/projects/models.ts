@@ -4,11 +4,11 @@ export interface Project {
   description: string
   sector: string
   status: string
-  emprendedor: {
+  authors: Array<{
     id: number
     names: string
     last_names: string
-  }
+  }>
 }
 
 export interface ProjectReducer {

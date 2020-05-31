@@ -16,7 +16,9 @@ export const getAll = (): AxiosPromise<any> => {
           birthday
           profession
           career
+          condition
           studentCode
+          proyectos { name }
         }
       }
     `,

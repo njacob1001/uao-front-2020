@@ -9,7 +9,6 @@ const FacilitatorForm: FC = () => {
   const currentUser = useRef<any>({})
   const history = useHistory()
   const handleSubmit = (values: any): void => {
-    console.log('finished', values)
     currentUser.current = values
     createEntrepreneur({
       provider: 'local',
@@ -81,7 +80,7 @@ const FacilitatorForm: FC = () => {
   }
 
   return (
-    <Block flex={1} width="50%" height="100%" margin="0 auto">
+    <Block flex={1} width="50%" height="100%" margin="0 auto" overflow="scroll">
       <Typography.Title>Nuevo Emprendedor</Typography.Title>
       <Divider />
       <Form onFinish={handleSubmit} layout="vertical">
@@ -103,10 +102,18 @@ const FacilitatorForm: FC = () => {
           rules={[{ required: true, message: 'Este campo es requerido' }]}>
           <Input type="number" />
         </Form.Item>
+
         <Form.Item
-          label="Código"
-          name="studentCode"
+          label="Tipo"
+          name="condition"
           rules={[{ required: true, message: 'Este campo es requerido' }]}>
+          <Select>
+            <Select.Option value="Egresado">Egresado</Select.Option>
+            <Select.Option value="Estudiante">Estudiante</Select.Option>
+            <Select.Option value="Otro">Otro</Select.Option>
+          </Select>
+        </Form.Item>
+        <Form.Item label="Código" name="studentCode">
           <Input type="number" />
         </Form.Item>
         <Form.Item
@@ -124,6 +131,7 @@ const FacilitatorForm: FC = () => {
           ]}>
           <Input type="email" />
         </Form.Item>
+
         <Form.Item label="Carrera" name="career">
           <Select>
             <Select.OptGroup key="uno" label="Ingeniería">

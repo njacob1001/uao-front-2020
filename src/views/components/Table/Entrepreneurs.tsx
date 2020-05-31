@@ -1,9 +1,15 @@
 import React, { FC } from 'react'
 import { useSelector } from 'react-redux'
 import { entrepreneursSelector } from 'ducks/entrepreneurs/selectors'
+import moment from 'moment'
 import TableTemplate from './MainTemplate'
 
 const columns: any[] = [
+  {
+    title: 'Estado',
+    dataIndex: 'condition',
+    key: 'condition',
+  },
   {
     title: 'Nombres',
     dataIndex: 'names',
@@ -15,7 +21,7 @@ const columns: any[] = [
     key: 'last_names',
   },
   {
-    title: 'Fecha de nacimiento',
+    title: 'Edad',
     dataIndex: 'birthday',
     key: 'birthday',
   },
@@ -29,13 +35,22 @@ const columns: any[] = [
     dataIndex: 'career',
     key: 'career',
   },
+  {
+    title: 'Proyectos',
+    dataIndex: 'proyectos',
+    key: 'proyectos',
+  },
 ]
 const FacilitatorsTable: FC<any> = () => {
   const entrepreneurs = useSelector(entrepreneursSelector)
 
   return (
     <TableTemplate
-      data={entrepreneurs}
+      data={entrepreneurs?.map((item: any) => ({
+        ...item,
+        proyectos: item.proyectos?.length || 'Ninguno',
+        birthday: item.birthday ? moment().diff(item.birthday, 'years', false) : 'N/A',
+      }))}
       columns={columns}
       title="Emprendedores"
       collection="users"

@@ -104,7 +104,10 @@ const FacilitatorForm: FC = () => {
       <Typography.Title>Nuevo Proyecto</Typography.Title>
       <Divider />
       <Form
-        initialValues={{ ...initialValues, emprendedor: initialValues?.emprendedor.id }}
+        initialValues={{
+          ...initialValues,
+          authors: (initialValues as any)?.authors?.map((author: any) => author.id),
+        }}
         onFinish={handleSubmit}
         layout="vertical">
         <Form.Item
@@ -131,10 +134,10 @@ const FacilitatorForm: FC = () => {
         </Form.Item>
 
         <Form.Item
-          label="Emprendedor asociado"
-          name="emprendedor"
+          label="Emprendedores asociados"
+          name="authors"
           rules={[{ required: true, message: 'Este campo es requerido' }]}>
-          <Select showSearch filterOption={handleSearch}>
+          <Select showSearch filterOption={handleSearch} mode="multiple">
             {emprendedores.map((usr: any) => (
               <Select.Option key={`usr-${usr.id}`} value={usr.id}>
                 {`${usr.names} ${usr.last_names}`}

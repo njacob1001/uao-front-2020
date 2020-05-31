@@ -16,6 +16,7 @@ const initialState: UserReducer = {
   error: null,
   username: '',
   photo: '',
+  knowledges: [],
 }
 
 export const userReducer: Reducer<UserReducer> = (state = initialState, action) => {

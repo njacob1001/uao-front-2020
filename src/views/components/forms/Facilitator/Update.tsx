@@ -132,6 +132,20 @@ const FacilitatorForm: FC = () => {
           </Select>
         </Form.Item>
         <Form.Item
+          label="Conocimientos"
+          name="knowledges"
+          rules={[{ required: true, message: 'Este campo es requerido' }]}>
+          <Select mode="tags">
+            <Select.Option value="Seguridad informática">Seguridad informática</Select.Option>
+            <Select.Option value="Experiencia de usuario">Experiencia de usuario</Select.Option>
+            <Select.Option value="Diseño de interacciones">Diseño de interacciones</Select.Option>
+            <Select.Option value="Formulación de proyectos">Formulación de proyectos</Select.Option>
+            <Select.Option value="Gerencia de proyectos">Gerencia de proyectos</Select.Option>
+            <Select.Option value="Contabilidad">Contabilidad</Select.Option>
+            <Select.Option value="Análisis de riesgos">Analisis de riesgos</Select.Option>
+          </Select>
+        </Form.Item>
+        <Form.Item
           label="Celular"
           name="phone"
           rules={[{ required: true, message: 'Este campo es requerido' }]}>

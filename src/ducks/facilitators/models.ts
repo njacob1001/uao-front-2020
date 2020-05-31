@@ -17,6 +17,7 @@ export interface Facilitator {
   address: string
   birthday: string
   profession: string
+  knowledges: string[]
   busy: Busy[]
 }
 

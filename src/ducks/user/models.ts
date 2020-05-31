@@ -11,4 +11,5 @@ export interface UserReducer {
   readonly lastName: string
   readonly username: string
   readonly photo: string
+  readonly knowledges: string[]
 }

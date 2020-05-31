@@ -15,9 +15,9 @@ const columns: any[] = [
     key: 'sector',
   },
   {
-    title: 'Emprendedor',
-    dataIndex: 'entrepreneurName',
-    key: 'entrepreneurName',
+    title: 'Emprendedores',
+    dataIndex: 'emprendedores',
+    key: 'emprendedores',
   },
   {
     title: 'Descripcion',
@@ -33,7 +33,7 @@ const FacilitatorsTable: FC<any> = () => {
     <TableTemplate
       data={projects?.map(item => ({
         ...item,
-        entrepreneurName: `${item?.emprendedor?.names} ${item?.emprendedor?.last_names}`,
+        emprendedores: item?.authors?.length || '0',
       }))}
       columns={columns}
       title="Proyectos"

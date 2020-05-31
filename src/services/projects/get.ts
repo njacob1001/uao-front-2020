@@ -10,7 +10,7 @@ export const getAll = (): AxiosPromise<any> => {
           description
           sector
           status
-          emprendedor {
+          authors {
             id
             names
             last_names

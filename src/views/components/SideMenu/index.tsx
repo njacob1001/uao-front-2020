@@ -9,6 +9,7 @@ import {
   SolutionOutlined,
   CommentOutlined,
   RocketOutlined,
+  CrownOutlined,
 } from '@ant-design/icons'
 import { Block } from 'views/components/UI/content'
 import { useDispatch } from 'react-redux'
@@ -48,6 +49,12 @@ const SideBarMenu: FC = () => {
 
         <Menu.Item key="facilitators">
           <Link to="/app/facilitators/all">
+            <CrownOutlined />
+            <span>Administradores</span>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="facilitators">
+          <Link to="/app/facilitators/all">
             <TeamOutlined />
             <span>Facilitadores</span>
           </Link>
@@ -81,13 +88,13 @@ const SideBarMenu: FC = () => {
           <Menu.Item key="meetingspending">
             <Link to="/app/encuentros/all">
               <CommentOutlined />
-              <span>Pendientes</span>
+              <span>Agendados</span>
             </Link>
           </Menu.Item>
           <Menu.Item key="meetingssheduled">
             <Link to="/app/encuentros/all">
               <CommentOutlined />
-              <span>Agendados</span>
+              <span>Realizados</span>
             </Link>
           </Menu.Item>
         </Menu.SubMenu>

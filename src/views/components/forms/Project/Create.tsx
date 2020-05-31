@@ -17,9 +17,7 @@ const FacilitatorForm: FC = () => {
 
     createProject({
       ...values,
-      emprendedor: {
-        id: values.emprendedor,
-      },
+      authors: values.authors.map((authorId: any) => ({ id: authorId })),
     })
       .then(({ data }: any) => {
         console.log(data)
@@ -123,10 +121,10 @@ const FacilitatorForm: FC = () => {
         </Form.Item>
 
         <Form.Item
-          label="Emprendedor asociado"
-          name="emprendedor"
+          label="Emprendedores asociados"
+          name="authors"
           rules={[{ required: true, message: 'Este campo es requerido' }]}>
-          <Select showSearch filterOption={handleSearch}>
+          <Select showSearch filterOption={handleSearch} mode="multiple">
             {emprendedores.map((usr: any) => (
               <Select.Option key={`usr-${usr.id}`} value={usr.id}>
                 {`${usr.names} ${usr.last_names}`}

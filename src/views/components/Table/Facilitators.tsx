@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import { useSelector } from 'react-redux'
 import { facilitatorSelector } from 'ducks/facilitators/selectors'
+import moment from 'moment'
 import TableTemplate from './MainTemplate'
 
 const columns: any[] = [
@@ -15,7 +16,7 @@ const columns: any[] = [
     key: 'last_names',
   },
   {
-    title: 'Fecha de nacimiento',
+    title: 'Edad',
     dataIndex: 'birthday',
     key: 'birthday',
   },
@@ -35,7 +36,10 @@ const FacilitatorsTable: FC<any> = () => {
 
   return (
     <TableTemplate
-      data={facilitators}
+      data={facilitators?.map((item: any) => ({
+        ...item,
+        birthday: item.birthday ? moment().diff(item.birthday, 'years', false) : 'N/A',
+      }))}
       columns={columns}
       title="Facilitadores"
       collection="users"

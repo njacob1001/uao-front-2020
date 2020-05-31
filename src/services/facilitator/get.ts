@@ -9,6 +9,7 @@ export const getAll = (): AxiosPromise<any> => {
           names
           last_names
           email
+          knowledges
           identification
           phone
           photo {url}

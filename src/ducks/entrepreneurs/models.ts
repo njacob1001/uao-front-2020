@@ -11,6 +11,8 @@ export interface Entrepreneur {
   profession: string
   career: string
   studentCode: string
+  type: string // posiblemente no se use
+  condition: string
 }
 
 export interface EntrepreneurReducer {

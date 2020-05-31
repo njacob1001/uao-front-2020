@@ -105,11 +105,18 @@ const FacilitatorForm: FC = () => {
           rules={[{ required: true, message: 'Este campo es requerido' }]}>
           <Input type="number" />
         </Form.Item>
-        <Form.Item
-          label="Código"
-          name="studentCode"
-          rules={[{ required: true, message: 'Este campo es requerido' }]}>
+        <Form.Item label="Código" name="studentCode">
           <Input type="number" />
+        </Form.Item>
+        <Form.Item
+          label="Tipo"
+          name="condition"
+          rules={[{ required: true, message: 'Este campo es requerido' }]}>
+          <Select>
+            <Select.Option value="Egresado">Egresado</Select.Option>
+            <Select.Option value="Estudiante">Estudiante</Select.Option>
+            <Select.Option value="Otro">Otro</Select.Option>
+          </Select>
         </Form.Item>
         <Form.Item
           label="Correo"
