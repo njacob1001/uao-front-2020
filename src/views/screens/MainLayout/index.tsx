@@ -19,6 +19,9 @@ import CreateEntrepreneur from '../Entrepreneurs/Create'
 import UpdateEntrepreneur from '../Entrepreneurs/Update'
 import CreateMeeting from '../Meeting/Create'
 import UpdateMeeting from '../Meeting/Update'
+import TodayMeetings from '../Meeting/Today'
+import MeetingsAgendados from '../Meeting/Scheduled'
+import MeetingsCompletados from '../Meeting/Completed'
 
 const { Sider, Content, Footer } = Layout
 
@@ -64,8 +67,14 @@ const MainLayout: FC = () => {
             <Route path="/app/facilitators/update/:id">
               <UpdateFacilitator />
             </Route>
-            <Route path="/app/encuentros/all">
-              <Meetings />
+            <Route path="/app/encuentros/hoy">
+              <TodayMeetings />
+            </Route>
+            <Route path="/app/encuentros/agendados">
+              <MeetingsAgendados />
+            </Route>
+            <Route path="/app/encuentros/realizados">
+              <MeetingsCompletados />
             </Route>
             <Route path="/app/encuentros/create">
               <CreateMeeting />

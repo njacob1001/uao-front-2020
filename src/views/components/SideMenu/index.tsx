@@ -36,36 +36,32 @@ const SideBarMenu: FC = () => {
         <SmallLogo src="https://i.imgur.com/Mbnw2Hq.png" />
       </Block>
 
-      <Menu
-        selectedKeys={[pathname.split('/')[1]]}
-        defaultSelectedKeys={['inicio']}
-        mode="inline"
-        theme="light">
+      <Menu selectedKeys={[pathname]} mode="inline" theme="light">
         <Block height="2rem" />
         <Menu.Item key="inicio">
           <DesktopOutlined />
           <span>Inicio</span>
         </Menu.Item>
 
-        <Menu.Item key="facilitators">
-          <Link to="/app/facilitators/all">
+        <Menu.Item key="/app/admins/all">
+          <Link to="/app/admins/all">
             <CrownOutlined />
             <span>Administradores</span>
           </Link>
         </Menu.Item>
-        <Menu.Item key="facilitators">
+        <Menu.Item key="/app/facilitators/all">
           <Link to="/app/facilitators/all">
             <TeamOutlined />
             <span>Facilitadores</span>
           </Link>
         </Menu.Item>
-        <Menu.Item key="entrepreneurs">
+        <Menu.Item key="/app/emprendedores/all">
           <Link to="/app/emprendedores/all">
             <TeamOutlined />
             <span>Emprendedores</span>
           </Link>
         </Menu.Item>
-        <Menu.Item key="projects">
+        <Menu.Item key="/app/proyectos/all">
           <Link to="/app/proyectos/all">
             <RocketOutlined />
             <span>Proyectos</span>
@@ -79,20 +75,20 @@ const SideBarMenu: FC = () => {
               <span>Encuentros</span>
             </span>
           }>
-          <Menu.Item key="meetingsall">
-            <Link to="/app/encuentros/all">
+          <Menu.Item key="/app/encuentros/hoy">
+            <Link to="/app/encuentros/hoy">
               <CommentOutlined />
               <span>Hoy</span>
             </Link>
           </Menu.Item>
-          <Menu.Item key="meetingspending">
-            <Link to="/app/encuentros/all">
+          <Menu.Item key="/app/encuentros/agendados">
+            <Link to="/app/encuentros/agendados">
               <CommentOutlined />
               <span>Agendados</span>
             </Link>
           </Menu.Item>
-          <Menu.Item key="meetingssheduled">
-            <Link to="/app/encuentros/all">
+          <Menu.Item key="/app/encuentros/realizados">
+            <Link to="/app/encuentros/realizados">
               <CommentOutlined />
               <span>Realizados</span>
             </Link>

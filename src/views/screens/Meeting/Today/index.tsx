@@ -3,12 +3,12 @@ import MeetingTable from 'views/components/Table/Meetings'
 import { useDispatch } from 'react-redux'
 import { MAIN_REQUEST } from 'ducks/meeting/action-types'
 
-const Meetings: FC = () => {
+const TodayMeetings: FC = () => {
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(MAIN_REQUEST.trigger())
+    dispatch(MAIN_REQUEST.trigger({ type: 'today' }))
   }, [])
-  return <MeetingTable />
+  return <MeetingTable title="Encuentros Hoy" />
 }
 
-export default Meetings
+export default TodayMeetings

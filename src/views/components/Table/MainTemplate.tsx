@@ -109,10 +109,18 @@ const FacilitatorsTable: FC<any> = ({
       ),
   })
 
-  const parsedcolumns = columns.map((cl: any) => ({
-    ...cl,
-    ...getColumnSearchProps(cl.key),
-  }))
+  const parsedcolumns = columns.map((cl: any) =>
+    cl.render
+      ? {
+          ...cl,
+          ...getColumnSearchProps(cl.key),
+          render: cl.render,
+        }
+      : {
+          ...cl,
+          ...getColumnSearchProps(cl.key),
+        }
+  )
 
   return (
     <Block flex={1}>

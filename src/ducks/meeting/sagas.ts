@@ -2,10 +2,10 @@ import { all, takeLatest, put, call, select } from 'redux-saga/effects'
 import { getAll } from 'services/encuentro'
 import * as TYPES from './action-types'
 
-function* getAllMeetings(): any {
+function* getAllMeetings(action: any): any {
   try {
     yield put(TYPES.MAIN_REQUEST.request())
-    const { data: result } = yield call(getAll)
+    const { data: result } = yield call(getAll, action?.payload?.type)
     if (result.data?.encuentros) {
       yield put(TYPES.MAIN_REQUEST.success(result.data?.encuentros))
     }

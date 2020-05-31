@@ -3,12 +3,12 @@ import MeetingTable from 'views/components/Table/Meetings'
 import { useDispatch } from 'react-redux'
 import { MAIN_REQUEST } from 'ducks/meeting/action-types'
 
-const Meetings: FC = () => {
+const MeetingsCompletados: FC = () => {
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(MAIN_REQUEST.trigger())
+    dispatch(MAIN_REQUEST.trigger({ type: 'completed' }))
   }, [])
-  return <MeetingTable />
+  return <MeetingTable title="Encuentros realizados" />
 }
 
-export default Meetings
+export default MeetingsCompletados
