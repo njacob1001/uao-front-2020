@@ -26,9 +26,6 @@ const CreateMeetingForm: FC = () => {
   const handleSubmit = (values: any): void => {
     currentUser.current = values
 
-    console.log(values)
-    console.log(`${values.start.format()}`)
-
     updateEncuentro({
       id,
       ...values,

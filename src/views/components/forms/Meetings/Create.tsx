@@ -21,9 +21,6 @@ const CreateMeetingForm: FC = () => {
   const handleSubmit = (values: any): void => {
     currentUser.current = values
 
-    console.log(values)
-    console.log(`${values.start.format()}`)
-
     createEncuentro({
       ...values,
       end: moment(values.start)
@@ -41,7 +38,6 @@ const CreateMeetingForm: FC = () => {
       },
     })
       .then(({ data }: any) => {
-        console.log(data)
         const projectId = data.id
         currentUser.current.id = projectId
         setStatus('finished')

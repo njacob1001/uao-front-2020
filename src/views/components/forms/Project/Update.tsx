@@ -26,7 +26,6 @@ const FacilitatorForm: FC = () => {
       },
     })
       .then(({ data }: any) => {
-        console.log(data)
         const projectId = data.id
         currentUser.current.id = projectId
         setStatus('finished')

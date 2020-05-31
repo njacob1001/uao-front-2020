@@ -75,7 +75,6 @@ const FacilitatorForm: FC = () => {
   }
   if (!initialValues) return null
 
-  console.log(initialValues)
   return (
     <Block flex={1} width="50%" height="100%" margin="0 auto">
       <Typography.Title>Actualizar información</Typography.Title>

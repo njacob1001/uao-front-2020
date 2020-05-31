@@ -62,7 +62,6 @@ const columns: any[] = [
 ]
 const FacilitatorsTable: FC<any> = ({ title = 'Encuentros' }) => {
   const meetings = useSelector(allMeetingSelectors)
-  console.log(meetings)
 
   return (
     <TableTemplate

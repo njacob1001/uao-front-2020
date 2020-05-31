@@ -5,7 +5,6 @@ import { Typography, Form, Input, Button, message } from 'antd'
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { LOGIN } from 'ducks/user/action-types'
-import { PrimaryButton } from 'views/components/UI/Buttons'
 import { UserOutlined, LockOutlined, GoogleOutlined } from '@ant-design/icons'
 import get from 'lodash/get'
 
@@ -27,8 +26,7 @@ const LoginForm: FC = () => {
       message.error('errorStatus')
     }
   }, [errorStatus])
-  const handleLogin = () => {
-    console.log({ user: user?.current?.input?.value, pass: pass?.current?.input?.value })
+  const handleLogin = (): void => {
     dispatch(
       LOGIN.trigger({
         user: user?.current?.input?.value,
@@ -41,7 +39,7 @@ const LoginForm: FC = () => {
     history.push('/app')
   }
 
-  const handleGoogleLogin = (e: any) => {
+  const handleGoogleLogin = (e: any): void => {
     e.preventDefault()
     window.open(
       `${process.env.REACT_APP_CMS_URL}/connect/google`,
@@ -50,7 +48,7 @@ const LoginForm: FC = () => {
     )
   }
 
-  const receiveDataFromPopup = (data: any) => {
+  const receiveDataFromPopup = (data: any): void => {
     if (get(data, 'data.type', '') === 'REGISTRATION') {
       const parts = get(data, 'data.rawUrl', '').match(/([^\?]+)(\?.*)?/)
       const query = parts[2] || ''

@@ -12,9 +12,10 @@ import {
   CrownOutlined,
 } from '@ant-design/icons'
 import { Block } from 'views/components/UI/content'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { LOGOUT_SAGA } from 'ducks/user/types'
 import { useLocation, Link } from 'react-router-dom'
+import { roleSelector } from 'ducks/user/selectors'
 
 const SideBarMenu: FC = () => {
   const dispatch = useDispatch()
@@ -24,7 +25,9 @@ const SideBarMenu: FC = () => {
     })
   }
   const { pathname } = useLocation()
-
+  const role = useSelector(roleSelector)
+  const isAdmin = role === 'administrador'
+  const isEmployee = role === 'administrador' || role === 'facilitador'
   return (
     <>
       <Block
@@ -43,24 +46,30 @@ const SideBarMenu: FC = () => {
           <span>Inicio</span>
         </Menu.Item>
 
-        <Menu.Item key="/app/administradores/all">
-          <Link to="/app/administradores/all">
-            <CrownOutlined />
-            <span>Administradores</span>
-          </Link>
-        </Menu.Item>
-        <Menu.Item key="/app/facilitators/all">
-          <Link to="/app/facilitators/all">
-            <TeamOutlined />
-            <span>Facilitadores</span>
-          </Link>
-        </Menu.Item>
-        <Menu.Item key="/app/emprendedores/all">
-          <Link to="/app/emprendedores/all">
-            <TeamOutlined />
-            <span>Emprendedores</span>
-          </Link>
-        </Menu.Item>
+        {isAdmin && (
+          <Menu.Item key="/app/administradores/all">
+            <Link to="/app/administradores/all">
+              <CrownOutlined />
+              <span>Administradores</span>
+            </Link>
+          </Menu.Item>
+        )}
+        {isEmployee && (
+          <Menu.Item key="/app/facilitators/all">
+            <Link to="/app/facilitators/all">
+              <TeamOutlined />
+              <span>Facilitadores</span>
+            </Link>
+          </Menu.Item>
+        )}
+        {isEmployee && (
+          <Menu.Item key="/app/emprendedores/all">
+            <Link to="/app/emprendedores/all">
+              <TeamOutlined />
+              <span>Emprendedores</span>
+            </Link>
+          </Menu.Item>
+        )}
         <Menu.Item key="/app/proyectos/all">
           <Link to="/app/proyectos/all">
             <RocketOutlined />

@@ -1,9 +1,11 @@
 import React, { FC, useState } from 'react'
 import { Table, Typography, Button, Popconfirm, message, Space, Input } from 'antd'
-import { PlusOutlined, SearchOutlined } from '@ant-design/icons'
+import { PlusOutlined, SearchOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
 import Highlighter from 'react-highlight-words'
+import { useSelector } from 'react-redux'
+import { roleSelector } from 'ducks/user/selectors'
 import { Block } from '../UI/content'
 
 const { Title } = Typography
@@ -41,13 +43,17 @@ const FacilitatorsTable: FC<any> = ({
         message.error('No se pudieron borrar los elementos')
       })
   }
-
-  const rowSelection = {
-    selectedRowKeys: selected,
-    onChange: onSelectChange,
-    hideDefaultSelections: true,
-    selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
-  }
+  const role = useSelector(roleSelector)
+  // const isAdmin = role === 'administrador'
+  const isEmployee = role === 'administrador' || role === 'facilitador'
+  const rowSelection = isEmployee
+    ? {
+        selectedRowKeys: selected,
+        onChange: onSelectChange,
+        hideDefaultSelections: true,
+        selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
+      }
+    : undefined
 
   const handleSearch = (selectedKeys: any, confirm: any, dataIndex: any): void => {
     confirm()
@@ -126,27 +132,51 @@ const FacilitatorsTable: FC<any> = ({
     <Block flex={1}>
       <Block display="flex" alignItems="center">
         <Title style={{ marginBottom: 0 }}>{title}</Title>
-        <Block ml="3rem">
-          <Link to={createPath}>
-            <Button type="primary" shape="round" icon={<PlusOutlined />} size="large">
-              Crear
-            </Button>
-          </Link>
-        </Block>
+        {isEmployee && (
+          <Block ml="3rem" display="flex" flexDirection="row">
+            <Link to={createPath}>
+              <Button type="primary" shape="round" icon={<PlusOutlined />} size="large">
+                Crear
+              </Button>
+            </Link>
+            {selected.length === 1 ? (
+              <Block ml="1.2rem">
+                <Button
+                  icon={<EditOutlined />}
+                  shape="round"
+                  size="large"
+                  type="primary"
+                  onClick={() => {
+                    history.push(`${updatePath}/update/${selected[0]}`)
+                  }}>
+                  Editar
+                </Button>
+              </Block>
+            ) : null}
+            {selected.length ? (
+              <Block ml="1.2rem">
+                <Popconfirm
+                  title="Esta acción es permanente"
+                  okText="Eliminar"
+                  okButtonProps={{ danger: true }}
+                  cancelText="Cancelar"
+                  onConfirm={handleDelete}>
+                  <Button
+                    icon={<DeleteOutlined />}
+                    type="primary"
+                    danger
+                    shape="round"
+                    size="large">
+                    {`Eliminar ${selected.length}`}
+                  </Button>
+                </Popconfirm>
+              </Block>
+            ) : null}
+          </Block>
+        )}
       </Block>
-      <Block height="3rem" display="flex" alignItems="center">
-        {selected.length ? (
-          <Popconfirm
-            title="Esta acción es permanente"
-            okText="Eliminar"
-            okButtonProps={{ danger: true }}
-            cancelText="Cancelar"
-            onConfirm={handleDelete}>
-            <Button type="primary" danger>
-              Eliminar items seleccionados
-            </Button>
-          </Popconfirm>
-        ) : null}
+      <Block height="2rem">
+        <span />
       </Block>
       <Table
         onRow={record => ({

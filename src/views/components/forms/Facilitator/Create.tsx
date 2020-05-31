@@ -9,7 +9,6 @@ const FacilitatorForm: FC = () => {
   const currentUser = useRef<any>({})
   const history = useHistory()
   const handleSubmit = (values: any): void => {
-    console.log('finished', values)
     currentUser.current = values
     createFacilitator({
       provider: 'local',

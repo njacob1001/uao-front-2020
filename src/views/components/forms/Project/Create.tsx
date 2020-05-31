@@ -20,7 +20,6 @@ const FacilitatorForm: FC = () => {
       authors: values.authors.map((authorId: any) => ({ id: authorId })),
     })
       .then(({ data }: any) => {
-        console.log(data)
         const projectId = data.id
         currentUser.current.id = projectId
         setStatus('finished')
