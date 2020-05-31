@@ -1,5 +1,5 @@
 import { all, takeLatest, put, call, select } from 'redux-saga/effects'
-import { getMeetings, getAll } from 'services/meeting'
+import { getAll } from 'services/encuentro'
 import * as TYPES from './action-types'
 
 function* getAllMeetings(): any {
@@ -16,26 +16,26 @@ function* getAllMeetings(): any {
   }
 }
 
-function* meetingSaga(): any {
-  try {
-    const user = yield select((store: any) => store?.userReducer)
-    console.log(user)
-    const { id: userID, role } = user
-    yield put(TYPES.MEETING.request())
-    const { data: result } = yield call(getMeetings, userID, role)
-    if (result.data?.meetings) {
-      yield put(TYPES.MEETING.success(result.data?.meetings))
-    }
-  } catch (err) {
-    yield put(TYPES.MEETING.failure(err))
-  } finally {
-    yield put(TYPES.MEETING.fulfill())
-  }
-}
+// function* meetingSaga(): any {
+//   try {
+//     const user = yield select((store: any) => store?.userReducer)
+//     console.log(user)
+//     const { id: userID, role } = user
+//     yield put(TYPES.MEETING.request())
+//     const { data: result } = yield call(getMeetings, userID, role)
+//     if (result.data?.meetings) {
+//       yield put(TYPES.MEETING.success(result.data?.meetings))
+//     }
+//   } catch (err) {
+//     yield put(TYPES.MEETING.failure(err))
+//   } finally {
+//     yield put(TYPES.MEETING.fulfill())
+//   }
+// }
 
 export function* meetingSagas(): any {
   yield all([
-    takeLatest(TYPES.MEETING.TRIGGER, meetingSaga),
+    // takeLatest(TYPES.MEETING.TRIGGER, meetingSaga),
     takeLatest(TYPES.MAIN_REQUEST.TRIGGER, getAllMeetings),
   ])
 }

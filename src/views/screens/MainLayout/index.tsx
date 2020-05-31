@@ -17,6 +17,8 @@ import Meetings from '../Meeting'
 import NotFound from '../NotFound'
 import CreateEntrepreneur from '../Entrepreneurs/Create'
 import UpdateEntrepreneur from '../Entrepreneurs/Update'
+import CreateMeeting from '../Meeting/Create'
+import UpdateMeeting from '../Meeting/Update'
 
 const { Sider, Content, Footer } = Layout
 
@@ -66,10 +68,10 @@ const MainLayout: FC = () => {
               <Meetings />
             </Route>
             <Route path="/app/encuentros/create">
-              <Meetings />
+              <CreateMeeting />
             </Route>
             <Route path="/app/encuentros/update/:id">
-              <Meetings />
+              <UpdateMeeting />
             </Route>
             <Route>
               <NotFound />

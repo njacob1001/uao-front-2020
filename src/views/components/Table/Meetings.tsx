@@ -6,6 +6,11 @@ import TableTemplate from './MainTemplate'
 
 const columns: any[] = [
   {
+    title: 'Facilitador',
+    dataIndex: 'facilitadorName',
+    key: 'facilitadorName',
+  },
+  {
     title: 'Asunto',
     dataIndex: 'asunto',
     key: 'asunto',
@@ -22,26 +27,20 @@ const columns: any[] = [
   },
 
   {
-    title: 'Emprendedor',
-    dataIndex: 'emprendedorName',
-    key: 'emprendedorName',
+    title: 'Emprendedores',
+    dataIndex: 'emprendedores',
+    key: 'emprendedores',
   },
-  {
-    title: 'Facilitador',
-    dataIndex: 'facilitadorName',
-    key: 'facilitadorName',
-  },
+
   {
     title: 'Proyecto',
     dataIndex: 'projectName',
     key: 'projectName',
   },
   {
-    title: 'Descripción',
-    dataIndex: 'description',
-    key: 'description',
-    width: 400,
-    ellipsis: true,
+    title: 'Lugar',
+    dataIndex: 'lugar',
+    key: 'lugar',
   },
 ]
 const FacilitatorsTable: FC<any> = () => {
@@ -49,11 +48,11 @@ const FacilitatorsTable: FC<any> = () => {
 
   return (
     <TableTemplate
-      data={meetings.map(me => ({
+      data={meetings.map((me: any) => ({
         ...me,
         end: moment(new Date(me.end)).format('MM/DD/YY hh:mm a'),
         start: moment(new Date(me.start)).format('MM/DD/YY hh:mm a'),
-        emprendedorName: `${me.emprendedor?.names} ${me.emprendedor?.last_names}`,
+        emprendedores: me.emprendedores?.length ? me.emprendedores?.length : '0',
         facilitadorName: `${me.facilitador?.names} ${me.facilitador?.last_names}`,
         projectName: me.proyecto?.name,
       }))}
