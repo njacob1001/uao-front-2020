@@ -8,6 +8,7 @@ import { FacilitatorReducer } from 'ducks/facilitators/models'
 import { facilitatorReducer } from 'ducks/facilitators/reducer'
 import { ProjectReducer } from 'ducks/projects/models'
 import { projectReducer } from 'ducks/projects/reducer'
+import { administratorReducer } from 'ducks/admins/reducer'
 
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux'
 import { persistStore, persistReducer } from 'redux-persist'
@@ -18,7 +19,9 @@ import { meetingSagas } from 'ducks/meeting/sagas'
 import { entrepeneursSagas } from 'ducks/entrepreneurs/sagas'
 import { facilitatorsSaga } from 'ducks/facilitators/sagas'
 import { projectsSagas } from 'ducks/projects/sagas'
+import { adminSaga } from 'ducks/admins/sagas'
 import createSagaMiddleware, { SagaIterator } from 'redux-saga'
+import { AdministratorReducer } from './admins/models'
 
 export interface Store {
   userReducer: UserReducer
@@ -26,6 +29,7 @@ export interface Store {
   entrepreneurReducer: EntrepreneurReducer
   facilitatorReducer: FacilitatorReducer
   projectReducer: ProjectReducer
+  administratorReducer: AdministratorReducer
 }
 
 function* rootSaga(): SagaIterator {
@@ -36,6 +40,7 @@ function* rootSaga(): SagaIterator {
       call(entrepeneursSagas),
       call(facilitatorsSaga),
       call(projectsSagas),
+      call(adminSaga),
     ])
   } catch (error) {
     console.error(error)
@@ -48,6 +53,7 @@ const rootReducer = combineReducers({
   entrepreneurReducer,
   facilitatorReducer,
   projectReducer,
+  administratorReducer,
 })
 
 const persistConfig = {
@@ -58,6 +64,7 @@ const persistConfig = {
     'entrepreneurReducer',
     'facilitatorReducer',
     'projectReducer',
+    'administratorReducer',
   ],
   storage,
 }

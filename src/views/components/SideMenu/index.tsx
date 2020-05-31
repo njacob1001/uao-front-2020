@@ -43,8 +43,8 @@ const SideBarMenu: FC = () => {
           <span>Inicio</span>
         </Menu.Item>
 
-        <Menu.Item key="/app/admins/all">
-          <Link to="/app/admins/all">
+        <Menu.Item key="/app/administradores/all">
+          <Link to="/app/administradores/all">
             <CrownOutlined />
             <span>Administradores</span>
           </Link>

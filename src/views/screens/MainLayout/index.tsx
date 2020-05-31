@@ -8,6 +8,7 @@ import { MAIN_REQUEST } from 'ducks/projects/types'
 import usePrivateRoute from 'hooks/Private/route'
 import Entrepreneurs from 'views/screens/Entrepreneurs'
 import Projects from '../Projects'
+import Administradores from '../Administrators'
 import CreateProjects from '../Projects/Create'
 import UpdateProjects from '../Projects/Update'
 import Facilitators from '../Facilitators'
@@ -22,6 +23,8 @@ import UpdateMeeting from '../Meeting/Update'
 import TodayMeetings from '../Meeting/Today'
 import MeetingsAgendados from '../Meeting/Scheduled'
 import MeetingsCompletados from '../Meeting/Completed'
+import CreateAdmin from '../Administrators/Create'
+import UpdateAdmin from '../Administrators/Update'
 
 const { Sider, Content, Footer } = Layout
 
@@ -40,6 +43,15 @@ const MainLayout: FC = () => {
         <Header />
         <Content style={{ margin: '24px 16px 0' }}>
           <Switch>
+            <Route path="/app/administradores/all">
+              <Administradores />
+            </Route>
+            <Route path="/app/administradores/crear">
+              <CreateAdmin />
+            </Route>
+            <Route path="/app/administradores/update/:id">
+              <UpdateAdmin />
+            </Route>
             <Route path="/app/proyectos/all">
               <Projects />
             </Route>
