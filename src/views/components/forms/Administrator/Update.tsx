@@ -18,7 +18,6 @@ const AdministratorForm: FC = () => {
 
   const handleSubmit = (values: any): void => {
     currentUser.current = values
-
     currentUser.current.id = id
     updateAdmin({
       id,
