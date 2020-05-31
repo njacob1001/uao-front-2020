@@ -80,7 +80,7 @@ const FacilitatorForm: FC = () => {
   }
 
   return (
-    <Block flex={1} width="50%" height="100%" margin="0 auto" overflow="scroll">
+    <Block flex={1} width="50%" height="100%" margin="0 auto">
       <Typography.Title>Nuevo Emprendedor</Typography.Title>
       <Divider />
       <Form onFinish={handleSubmit} layout="vertical">
