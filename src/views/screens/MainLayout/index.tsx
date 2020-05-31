@@ -18,6 +18,7 @@ import UpdateFacilitator from '../Facilitators/Update'
 import NotFound from '../NotFound'
 import CreateEntrepreneur from '../Entrepreneurs/Create'
 import UpdateEntrepreneur from '../Entrepreneurs/Update'
+import DetailEntrepreneur from '../Entrepreneurs/Details'
 import CreateMeeting from '../Meeting/Create'
 import UpdateMeeting from '../Meeting/Update'
 import TodayMeetings from '../Meeting/Today'
@@ -79,6 +80,9 @@ const MainLayout: FC = () => {
 
             <Route path="/app/emprendedores/all">
               <Entrepreneurs />
+            </Route>
+            <Route path="/app/emprendedores/detalles/:id">
+              <DetailEntrepreneur />
             </Route>
             {isEmployee && (
               <Route path="/app/emprendedores/create">

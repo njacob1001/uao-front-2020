@@ -17,6 +17,7 @@ const FacilitatorsTable: FC<any> = ({
   collection,
   createPath,
   updatePath,
+  hasDetail,
 }) => {
   const [selected, setSelected] = useState([])
   const [search, setSearch] = useState({
@@ -181,7 +182,9 @@ const FacilitatorsTable: FC<any> = ({
       <Table
         onRow={record => ({
           onDoubleClick: () => {
-            history.push(`${updatePath}/update/${record.id}`)
+            if (hasDetail) {
+              history.push(`${updatePath}/detalles/${record.id}`)
+            }
           },
         })}
         rowKey="id"

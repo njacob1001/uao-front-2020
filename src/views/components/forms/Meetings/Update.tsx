@@ -145,6 +145,7 @@ const CreateMeetingForm: FC = () => {
     lugar: (initialValues as any)?.lugar,
     asunto: (initialValues as any)?.asunto,
     description: (initialValues as any)?.description,
+    estado: (initialValues as any)?.estado,
   }
 
   return (
@@ -236,6 +237,13 @@ const CreateMeetingForm: FC = () => {
                 {`${usr.names} ${usr.last_names}`}
               </Select.Option>
             ))}
+          </Select>
+        </Form.Item>
+        <Form.Item label="Estado" name="estado">
+          <Select>
+            <Select.Option value="completado">Completado</Select.Option>
+            <Select.Option value="pendiente">Pendiente</Select.Option>
+            <Select.Option value="cancelado">Cancelado</Select.Option>
           </Select>
         </Form.Item>
         <Form.Item>

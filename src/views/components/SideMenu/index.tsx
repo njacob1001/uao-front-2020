@@ -4,9 +4,7 @@ import { Menu } from 'antd'
 import { SmallLogo } from 'views/components/UI/Images'
 import {
   LogoutOutlined,
-  DesktopOutlined,
   TeamOutlined,
-  SolutionOutlined,
   CommentOutlined,
   RocketOutlined,
   CrownOutlined,
@@ -41,10 +39,6 @@ const SideBarMenu: FC = () => {
 
       <Menu selectedKeys={[pathname]} mode="inline" theme="light">
         <Block height="2rem" />
-        <Menu.Item key="inicio">
-          <DesktopOutlined />
-          <span>Inicio</span>
-        </Menu.Item>
 
         {isAdmin && (
           <Menu.Item key="/app/administradores/all">
@@ -54,7 +48,7 @@ const SideBarMenu: FC = () => {
             </Link>
           </Menu.Item>
         )}
-        {isEmployee && (
+        {isAdmin && (
           <Menu.Item key="/app/facilitators/all">
             <Link to="/app/facilitators/all">
               <TeamOutlined />
@@ -104,10 +98,6 @@ const SideBarMenu: FC = () => {
           </Menu.Item>
         </Menu.SubMenu>
 
-        <Menu.Item key="actividades">
-          <SolutionOutlined />
-          <span>Actividades</span>
-        </Menu.Item>
         <Menu.Item key="logout" onClick={handleLogout}>
           <LogoutOutlined />
           <span>Logout</span>

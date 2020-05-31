@@ -12,4 +12,12 @@ export const TokenSelector: Selector<Store, string> = createSelector(selectUser,
 
 export const roleSelector: Selector<Store, string> = createSelector(selectUser, selectRole)
 
+export const metaDataUserSelector: Selector<Store, { role: string; id: string }> = createSelector(
+  selectUser,
+  (us): any => ({
+    role: us.role,
+    id: us.id,
+  })
+)
+
 // export const TokenSelector

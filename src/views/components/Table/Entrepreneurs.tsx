@@ -51,6 +51,7 @@ const FacilitatorsTable: FC<any> = () => {
         proyectos: item.proyectos?.length || 'Ninguno',
         birthday: item.birthday ? moment().diff(item.birthday, 'years', false) : 'N/A',
       }))}
+      hasDetail
       columns={columns}
       title="Emprendedores"
       collection="users"

@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { FC } from 'react'
 import { useSelector } from 'react-redux'
 import { allMeetingSelectors } from 'ducks/meeting/selectors'
@@ -52,6 +53,10 @@ const columns: any[] = [
       text === 'completado' ? (
         <Tag icon={<CheckCircleOutlined />} color="success">
           completado
+        </Tag>
+      ) : text === 'cancelado' ? (
+        <Tag icon={<CheckCircleOutlined />} color="error">
+          cancelado
         </Tag>
       ) : (
         <Tag icon={<ClockCircleOutlined />} color="default">

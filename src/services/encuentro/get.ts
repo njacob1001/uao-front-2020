@@ -1,10 +1,10 @@
 import axios, { AxiosPromise } from 'axios'
 import moment from 'moment'
 
-export const getAll = (type?: string): AxiosPromise<any> => {
+export const getAll = (type: string, queryFragment = ''): AxiosPromise<any> => {
   let query = `
     query {
-      encuentros(sort: "start:ASC") {
+      encuentros(sort: "start:ASC"${queryFragment}) {
         id
         asunto
         description
@@ -42,63 +42,63 @@ export const getAll = (type?: string): AxiosPromise<any> => {
           .format()
 
         query = `
-          query {
-            encuentros(sort: "start:ASC", where:{start_gte:"${start}", start_lte:"${end}"}){
-              id
-              asunto
-              description
-              start
-              end
-              virtual
-              lugar
-              estado
-              emprendedores{
-                id
-                names
-                last_names
+              query {
+                encuentros(sort: "start:ASC", where:{start_gte:"${start}", start_lte:"${end}"${queryFragment}}){
+                  id
+                  asunto
+                  description
+                  start
+                  end
+                  virtual
+                  lugar
+                  estado
+                  emprendedores{
+                    id
+                    names
+                    last_names
+                  }
+                  facilitador{
+                    id
+                    names
+                    last_names
+                  }
+                  proyecto{
+                    id
+                    name
+                  }
+                }
               }
-              facilitador{
-                id
-                names
-                last_names
-              }
-              proyecto{
-                id
-                name
-              }
-            }
-          }
-        `
+            `
       }
       break
     case 'completed':
       query = `
-        query {
-          encuentros(sort: "start:ASC", where:{estado:"completado"}){
-            id
-            asunto
-            description
-            start
-            end
-            virtual
-            lugar
-            estado
-            emprendedores{
-              id
-              names
-              last_names
+            query {
+              encuentros(sort: "start:ASC", where:{estado:"completado"${queryFragment}}){
+                id
+                asunto
+                description
+                start
+                end
+                virtual
+                lugar
+                estado
+                emprendedores{
+                  id
+                  names
+                  last_names
+                }
+                facilitador{
+                  id
+                  names
+                  last_names
+                }
+                proyecto{
+                  id
+                  name
+                }
+              }
             }
-            facilitador{
-              id
-              names
-              last_names
-            }
-            proyecto{
-              id
-              name
-            }
-          }
-        }
       `
 
       break
