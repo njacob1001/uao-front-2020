@@ -18,6 +18,7 @@ const FacilitatorsTable: FC<any> = ({
   createPath,
   updatePath,
   hasDetail,
+  refresh,
 }) => {
   const [selected, setSelected] = useState([])
   const [search, setSearch] = useState({
@@ -39,6 +40,9 @@ const FacilitatorsTable: FC<any> = ({
     Promise.all(deletePromises)
       .then(() => {
         message.success('Elementos eliminados correctamente')
+        if (refresh) {
+          refresh()
+        }
       })
       .catch(() => {
         message.error('No se pudieron borrar los elementos')

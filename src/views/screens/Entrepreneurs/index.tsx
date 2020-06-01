@@ -5,11 +5,16 @@ import { MAIN_REQUEST } from 'ducks/entrepreneurs/types'
 
 const Entrepreneurs: FC = () => {
   const dispatch = useDispatch()
-  useEffect(() => {
+
+  const refresh = (): void => {
     dispatch(MAIN_REQUEST.trigger())
+  }
+
+  useEffect(() => {
+    refresh()
   }, [])
 
-  return <EntrepreneursTable />
+  return <EntrepreneursTable refresh={refresh} />
 }
 
 export default Entrepreneurs

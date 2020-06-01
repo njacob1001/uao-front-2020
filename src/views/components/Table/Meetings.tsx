@@ -65,7 +65,7 @@ const columns: any[] = [
       ),
   },
 ]
-const FacilitatorsTable: FC<any> = ({ title = 'Encuentros' }) => {
+const FacilitatorsTable: FC<any> = ({ title = 'Encuentros', refresh }) => {
   const meetings = useSelector(allMeetingSelectors)
 
   return (
@@ -83,6 +83,7 @@ const FacilitatorsTable: FC<any> = ({ title = 'Encuentros' }) => {
       collection="encuentros"
       createPath="/app/encuentros/create"
       updatePath="/app/encuentros"
+      refresh={refresh}
     />
   )
 }

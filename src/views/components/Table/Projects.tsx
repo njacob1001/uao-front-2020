@@ -26,7 +26,7 @@ const columns: any[] = [
     ellipsis: true,
   },
 ]
-const FacilitatorsTable: FC<any> = () => {
+const FacilitatorsTable: FC<any> = ({ refresh }) => {
   const projects = useSelector(ProjectSelector)
 
   return (
@@ -40,6 +40,7 @@ const FacilitatorsTable: FC<any> = () => {
       collection="proyectos"
       createPath="/app/proyectos/create"
       updatePath="/app/proyectos"
+      refresh={refresh}
     />
   )
 }

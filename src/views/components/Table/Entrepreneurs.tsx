@@ -41,7 +41,7 @@ const columns: any[] = [
     key: 'proyectos',
   },
 ]
-const FacilitatorsTable: FC<any> = () => {
+const FacilitatorsTable: FC<any> = ({ refresh }) => {
   const entrepreneurs = useSelector(entrepreneursSelector)
 
   return (
@@ -57,6 +57,7 @@ const FacilitatorsTable: FC<any> = () => {
       collection="users"
       createPath="/app/emprendedores/create"
       updatePath="/app/emprendedores"
+      refresh={refresh}
     />
   )
 }

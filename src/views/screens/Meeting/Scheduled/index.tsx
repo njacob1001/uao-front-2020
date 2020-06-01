@@ -5,10 +5,13 @@ import { MAIN_REQUEST } from 'ducks/meeting/action-types'
 
 const MeetingsAgendados: FC = () => {
   const dispatch = useDispatch()
-  useEffect(() => {
+  const refresh = () => {
     dispatch(MAIN_REQUEST.trigger({ type: 'scheduled' }))
+  }
+  useEffect(() => {
+    refresh()
   }, [])
-  return <MeetingTable title="Encuentros Agendados" />
+  return <MeetingTable title="Encuentros Agendados" refresh={refresh} />
 }
 
 export default MeetingsAgendados

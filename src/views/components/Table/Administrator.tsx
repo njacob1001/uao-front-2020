@@ -26,7 +26,7 @@ const columns: any[] = [
     key: 'phone',
   },
 ]
-const AdministratorsTable: FC<any> = () => {
+const AdministratorsTable: FC<any> = ({ refresh }) => {
   const admins = useSelector(administratorSelector)
 
   return (
@@ -37,6 +37,7 @@ const AdministratorsTable: FC<any> = () => {
       collection="users"
       createPath="/app/administradores/crear"
       updatePath="/app/administradores"
+      refresh={refresh}
     />
   )
 }

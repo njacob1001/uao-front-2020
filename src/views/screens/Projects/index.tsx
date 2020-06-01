@@ -5,10 +5,13 @@ import { MAIN_REQUEST } from 'ducks/projects/types'
 
 const Projects: FC = () => {
   const dispatch = useDispatch()
-  useEffect(() => {
+  const refresh = () => {
     dispatch(MAIN_REQUEST.trigger())
+  }
+  useEffect(() => {
+    refresh()
   }, [])
-  return <ProjectsTables />
+  return <ProjectsTables refresh={refresh} />
 }
 
 export default Projects
