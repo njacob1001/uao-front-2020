@@ -5,10 +5,13 @@ import { MAIN_REQUEST } from 'ducks/admins/types'
 
 const Facilitators: FC = () => {
   const dispatch = useDispatch()
-  useEffect(() => {
+  const refresh = (): void => {
     dispatch(MAIN_REQUEST.trigger())
+  }
+  useEffect(() => {
+    refresh()
   }, [])
-  return <AdministratorTables />
+  return <AdministratorTables refresh={refresh} />
 }
 
 export default Facilitators

@@ -5,10 +5,13 @@ import { MAIN_REQUEST } from 'ducks/meeting/action-types'
 
 const MeetingsCompletados: FC = () => {
   const dispatch = useDispatch()
-  useEffect(() => {
+  const refresh = () => {
     dispatch(MAIN_REQUEST.trigger({ type: 'completed' }))
+  }
+  useEffect(() => {
+    refresh()
   }, [])
-  return <MeetingTable title="Encuentros realizados" />
+  return <MeetingTable title="Encuentros realizados" refresh={refresh} />
 }
 
 export default MeetingsCompletados

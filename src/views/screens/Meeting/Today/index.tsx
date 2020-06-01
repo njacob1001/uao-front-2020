@@ -5,10 +5,14 @@ import { MAIN_REQUEST } from 'ducks/meeting/action-types'
 
 const TodayMeetings: FC = () => {
   const dispatch = useDispatch()
-  useEffect(() => {
+  const refresh = (): void => {
     dispatch(MAIN_REQUEST.trigger({ type: 'today' }))
+  }
+
+  useEffect(() => {
+    refresh()
   }, [])
-  return <MeetingTable title="Encuentros Hoy" />
+  return <MeetingTable title="Encuentros Hoy" refresh={refresh} />
 }
 
 export default TodayMeetings

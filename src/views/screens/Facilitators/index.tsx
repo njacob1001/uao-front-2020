@@ -5,10 +5,13 @@ import { MAIN_REQUEST } from 'ducks/facilitators/types'
 
 const Facilitators: FC = () => {
   const dispatch = useDispatch()
-  useEffect(() => {
+  const refresh = (): void => {
     dispatch(MAIN_REQUEST.trigger())
+  }
+  useEffect(() => {
+    refresh()
   }, [])
-  return <FacilitatorsTable />
+  return <FacilitatorsTable refresh={refresh} />
 }
 
 export default Facilitators

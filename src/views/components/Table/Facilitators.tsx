@@ -31,7 +31,7 @@ const columns: any[] = [
     key: 'profession',
   },
 ]
-const FacilitatorsTable: FC<any> = () => {
+const FacilitatorsTable: FC<any> = ({ refresh }) => {
   const facilitators = useSelector(facilitatorSelector)
 
   return (
@@ -45,6 +45,7 @@ const FacilitatorsTable: FC<any> = () => {
       collection="users"
       createPath="/app/facilitators/create"
       updatePath="/app/facilitators"
+      refresh={refresh}
     />
   )
 }

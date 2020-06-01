@@ -1,7 +1,7 @@
 import { PersistGate } from 'redux-persist/integration/react'
 import React, { FC } from 'react'
 import { Provider } from 'react-redux'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import StoreConfig from 'ducks/store'
 import Login from 'views/screens/Login'
 import './override.less'
@@ -32,6 +32,9 @@ const App: FC = () => {
             </Route>
             <Route path="/app">
               <MainLayout />
+            </Route>
+            <Route path="/" exact>
+              <Redirect to="/login" />
             </Route>
             <Route>
               <NotFound />

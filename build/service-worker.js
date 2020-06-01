@@ -14,7 +14,11 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
+<<<<<<< HEAD
   "/precache-manifest.d38db17b77a83ddddfe465353b3f975c.js"
+=======
+  "/precache-manifest.24d82b7fc7b718e4cf5c60ac478c756c.js"
+>>>>>>> ing-soft
 );
 
 self.addEventListener('message', (event) => {
